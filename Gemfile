@@ -7,6 +7,7 @@ gem 'sqlite3'
 gem 'haml-rails'
 gem 'devise'
 gem 'therubyracer'
+gem 'formtastic'
 
 # Gems used only for assets and not required
 # in production environments by default.
