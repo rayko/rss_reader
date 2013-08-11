@@ -1,9 +1,9 @@
 Feature: User Registration
          In order to access the site
-         A guest
-         Should be able to register using the registration form
+         As a guest
+         I want to be able to register using the registration form
 
-         Scenario:
+         Scenario: Registration
                 Given I am on the index page
                 And I click the signup link
                 And I fill in "First Name" with "Lolcat"
@@ -14,3 +14,19 @@ Feature: User Registration
                 And I fill in "Password Confirmation" with "123456789"
                 When I press "Submit"
                 Then page should have notice message "A message with a confirmation link has been sent"
+
+        Scenario: Confirmation
+                  Given I created an account
+                  When I click the confirmation link from the email
+                  Then page should have notice message "Your account was successfully confirmed"
+
+        Scenario: Login with email
+                  Given I created and confirmed my account
+                  And I am on the index page
+                  And I click "Login" link
+                  And I fill in "Email" with my email
+                  And I fill in "Password" with my password
+                  When I click "Sign in" button
+                  Then page should have notice message "Signed in successfully"
+                  And I should see a "Logout" link
+                  And I should see a "Edit Profile" link
