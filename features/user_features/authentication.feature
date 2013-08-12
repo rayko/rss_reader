@@ -7,8 +7,8 @@ Feature: User Authentication
                   Given I created and confirmed my account
                   And I am on the index page
                   And I click "Login" link
-                  And I fill in "Login" with my email
-                  And I fill in "Password" with my password
+                  And I fill in "User Login" with my email
+                  And I fill in "User Password" with my password
                   When I click "Sign in" button
                   Then page should have notice message "Signed in successfully"
                   And I should see a "Logout" link
@@ -18,8 +18,8 @@ Feature: User Authentication
                   Given I created and confirmed my account
                   And I am on the index page
                   And I click "Login" link
-                  And I fill in "Login" with my login name
-                  And I fill in "Password" with my password
+                  And I fill in "User Login" with my login name
+                  And I fill in "User Password" with my password
                   When I click "Sign in" button
                   Then page should have notice message "Signed in successfully"
                   And I should see a "Logout" link

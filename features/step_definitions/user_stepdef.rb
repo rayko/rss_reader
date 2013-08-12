@@ -7,7 +7,7 @@ Given(/^I click the signup link$/) do
 end
 
 Given(/^I fill in "(.*?)" with "(.*?)"$/) do |field, value|
-  fill_in('user_' + field.downcase.split(' ').join('_'), :with => value)
+  fill_in(field.downcase.split(' ').join('_'), :with => value)
 end
 
 When(/^I press "(.*?)"$/) do |button|
@@ -37,12 +37,12 @@ end
 
 Given(/^I fill in "(.*?)" with my email$/) do |field|
   user = User.find_by_username('lolcat')
-  fill_in('user_' + field.downcase.split(' ').join('_'), :with => user.email)
+  fill_in(field.downcase.split(' ').join('_'), :with => user.email)
 end
 
 Given(/^I fill in "(.*?)" with my password$/) do |field|
   user = User.find_by_username('lolcat')
-  fill_in('user_' + field.downcase.split(' ').join('_'), :with => '123456789')
+  fill_in(field.downcase.split(' ').join('_'), :with => '123456789')
 end
 
 When(/^I click "(.*?)" button$/) do |name|
@@ -55,7 +55,7 @@ end
 
 Given(/^I fill in "(.*?)" with my login name$/) do |field|
   user = User.find_by_username('lolcat')
-  fill_in('user_' + field.downcase.split(' ').join('_'), :with => user.username)
+  fill_in(field.downcase.split(' ').join('_'), :with => user.username)
 end
 
 Given(/^I am logged in$/) do
