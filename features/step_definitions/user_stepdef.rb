@@ -61,3 +61,11 @@ end
 Given(/^I am logged in$/) do
   login_test_account_with_email
 end
+
+Then(/^I should see my information$/) do
+  user = retrive_test_account
+  find_field('user_first_name').value.should eq user.first_name
+  find_field('user_last_name').value.should eq user.last_name
+  find_field('user_username').value.should eq user.username
+  find_field('user_email').value.should eq user.email
+end
