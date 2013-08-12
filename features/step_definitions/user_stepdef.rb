@@ -19,12 +19,7 @@ Then(/^page should have notice message "(.*?)"$/) do |message|
 end
 
 Given(/^I created an account$/) do
-  user = User.create! :first_name => 'Lolcat',
-  :last_name => 'McAlliester',
-  :username => 'lolcat',
-  :email => 'lolcat@example.com',
-  :password => '123456789',
-  :password_confirmation => '123456789'
+  create_test_account
 end
 
 When(/^I click the confirmation link from the email$/) do
@@ -33,10 +28,7 @@ When(/^I click the confirmation link from the email$/) do
 end
 
 Given(/^I created and confirmed my account$/) do
-  user = User.create! :first_name => 'Lolcat', :last_name => 'McAlliester', :username => 'lolcat',
-  :email => 'lolcat@example.com', :password => '123456789', :password_confirmation => '123456789'
-
-  user.confirm!
+  create_and_confirm_test_account
 end
 
 Given(/^I click "(.*?)" link$/) do |name|
@@ -64,4 +56,8 @@ end
 Given(/^I fill in "(.*?)" with my login name$/) do |field|
   user = User.find_by_username('lolcat')
   fill_in('user_' + field.downcase.split(' ').join('_'), :with => user.username)
+end
+
+Given(/^I am logged in$/) do
+  login_test_account_with_email
 end
