@@ -1,4 +1,3 @@
-@wip
 Feature: User Profile Administration
          In order to update my profile
          As a registred and confirmed user
