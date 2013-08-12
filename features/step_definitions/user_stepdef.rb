@@ -69,3 +69,9 @@ Then(/^I should see my information$/) do
   find_field('user_username').value.should eq user.username
   find_field('user_email').value.should eq user.email
 end
+
+Then(/^I should see "(.*?)" as "(.*?)" on my profile$/) do |value, field|
+  visit edit_user_registration_path
+  find_field('user_' + field.downcase.split(' ').join('_')).value.should eq value
+
+end
