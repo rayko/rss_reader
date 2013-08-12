@@ -1,6 +1,10 @@
 RssReader::Application.routes.draw do
   devise_for :users
 
+  namespace :user do
+    resources :channels
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

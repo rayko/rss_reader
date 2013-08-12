@@ -13,6 +13,9 @@ class User < ActiveRecord::Base
 
   attr_accessor :login
 
+  # Relations
+  has_many :channels
+
   # Devise custon lookup by login or email for authentication
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
