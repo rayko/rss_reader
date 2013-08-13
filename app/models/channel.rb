@@ -3,10 +3,19 @@ class Channel < ActiveRecord::Base
 
   belongs_to :user
 
-  before_save :set_title
+  before_save :perform_first_fetch
+
+  require 'feed_manager'
+
+  def update_feed
+    feed = FeedManager.new.get_items self.url
+    # Article.add_from_feed_items feed.items, self.id
+  end
 
   private
-  def set_title
-    self.title = 'My Channel' # should be something else
+  def perform_first_fetch
+    feed = FeedManager.new.get_items self.url
+    self.title = feed.title
+    # Article.create_from_feed_items feed.items, self.id
   end
 end
