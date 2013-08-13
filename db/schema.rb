@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130813044637) do
+ActiveRecord::Schema.define(:version => 20130813065132) do
+
+  create_table "articles", :force => true do |t|
+    t.string   "title"
+    t.string   "link"
+    t.text     "description", :default => ""
+    t.datetime "pub_date"
+    t.text     "comment",     :default => ""
+    t.boolean  "starred",     :default => false
+    t.integer  "channel_id"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
 
   create_table "channels", :force => true do |t|
     t.string   "name"

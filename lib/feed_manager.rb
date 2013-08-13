@@ -1,10 +1,6 @@
 class FeedManager
   require 'feedzirra'
 
-  def validate(url)
-    # pending
-  end
-
   def fetch_feed(url)
     if Rails.env  == 'test'
       Feedzirra::Feed.parse File.open(Rails.root.join('test', 'mspaintadventures_test_feed.xml'), 'r').read
@@ -15,7 +11,8 @@ class FeedManager
 
   def get_items(url)
     data = fetch_feed(url)
-    return Feed.new data.title, data.items, data.url, feed_url
+    # validation pending
+    return Feed.new data.title, data.entries, data.url, data.feed_url, true
   end
 
   def update_feed(url)
@@ -23,24 +20,29 @@ class FeedManager
 end
 
 class Feed
-  attr_accessor :title, :items, :url, :feed_url
+  attr_accessor :title, :items, :url, :feed_url, :valid
 
-  def initializer(title, items, url, feed_url)
+  def initialize(title, items, url, feed_url, valid)
     self.title = title
     self.url = url
     self.feed_url =feed_url
+    self.valid = true
     self.items = []
 
     items.each do |item|
-      self.items << FeedItem.new(item.title, item.url, item.description, item.published)
+      self.items << FeedItem.new(item.title, item.url, item.summary, item.published)
     end
+  end
+
+  def valid?
+    self.valid
   end
 end
 
 class FeedItem
   attr_accessor :title, :url, :description, :pub_date
 
-  def initializer(title, url, description, pub_date)
+  def initialize(title, url, description, pub_date)
     self.title = title
     self.url = url
     self.description = description
