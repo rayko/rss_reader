@@ -10,4 +10,4 @@ Feature: Channel Administration
                    And I fill in "Channel Url" with "http://my_site.com/my_channel"
                    When I click "Save" button
                    Then page should have notice message "Channel created"
-                   And page should have "My Channel"
+                   And page should have "MS Paint Adventures"
