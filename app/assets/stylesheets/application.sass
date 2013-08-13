@@ -14,3 +14,114 @@
 @import "formtastic"
 @import "formtastic_ie6"
 @import "formtastic_ie7"
+
+
+=rounded-borders-($position, $r: 5px)
+  -webkit-border-#{$position}-right-radius: $r
+  -webkit-border-#{$position}-left-radius: $r
+  -khtml-border-#{$position}-right-radius: $r
+  -khtml-border-#{$position}-left-radius: $r
+  -moz-border-radius-#{$position}left: $r
+  -moz-border-radius-#{$position}right: $r
+  border-#{$position}-right-radius: $r
+  border-#{$position}-left-radius: $r
+
+=rounded-borders($r: 5px)
+  +rounded-borders-(bottom, $r)
+  +rounded-borders-(top, $r)
+
+
+body
+  margin: 0
+  padding: 0
+  width: 100%
+  text-align: center
+  min-width: 800px
+
+#nav
+  +rounded-borders
+  background-color: red
+  margin-left: auto
+  margin-right: auto
+  width: 95%
+  margin-bottom: 5px
+  height: 39px
+  .search_form
+    background-color: yellow
+    margin: 5px
+    padding: 5px
+    float: left
+  .nav_link
+    margin: 5px
+    padding: 5px
+    float: right
+    background-color: blue
+
+#main_container
+  clear: both
+  background-color: green
+  margin-left: auto
+  margin-right: auto
+  width: 95%
+
+#float_warpper
+  position: relative
+  width: 100%
+  background-color: pink
+
+#left_panel
+  background-color: purple
+  padding: 5px
+  float: left
+  width: 25%
+  min-width: 175px
+  text-align: left
+  p
+    margin: 0
+    padding: 0
+
+#special_channels
+  +rounded-borders
+  background-color: blue
+  padding: 5px
+  margin-bottom: 5px
+
+#add_channel
+  +rounded-borders
+  background-color: #CCCCCC
+  margin-bottom: 5px
+  padding: 5px
+
+#channel_list
+  +rounded-borders
+  background-color: yellow
+  padding: 5px
+
+#article_list
+  +rounded-borders
+  background-color: #81BEF7
+  float: right
+  width: 71%
+  text-align: left
+  padding: 5px
+
+
+#article_options
+  background-color: #81BEF7
+  padding: 5px
+
+.article
+  padding: 10px
+  margin-top: 2px
+  margin-bottom: 0
+  background-color: white
+  &:hover
+    background-color: blue
+  .date
+    float: right
+  .summary
+    text-color: #CCCCCC
+  .unread_title
+    font-weight: bold
+  .title
+    text-decoration: normal

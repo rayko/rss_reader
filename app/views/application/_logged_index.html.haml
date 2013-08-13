@@ -1,0 +1,62 @@
+%div#logo
+  /some logo
+
+%div#nav
+  - if user_signed_in?
+    %div.search_form
+      %span Some search
+    %div.nav_link
+      = link_to 'Edit Profile', edit_user_registration_url
+    %div.nav_link
+      = link_to 'Logout', destroy_user_session_url, :method => :delete
+  - else
+    %div.nav_link
+      = link_to 'Login', new_user_session_url
+    %div.nav_link
+      = link_to 'Sign Up', new_user_registration_url
+
+%div#main_container
+  %div#float_warpper
+    %div#left_panel
+      %div#special_channels
+        %p= link_to 'All Items', '#none'
+        %p= link_to 'Starred Items', '#none'
+      %div#add_channel
+        %p= link_to 'Add Channel', '#none'
+      %div#channel_list
+        %p= link_to 'Channel X', '#none'
+        %p= link_to 'Channel X', '#none'
+        %p= link_to 'Channel X', '#none'
+        %p= link_to 'Channel X', '#none'
+        %p= link_to 'Channel X', '#none'
+        %p= link_to 'Channel X', '#none'
+    %div#article_list
+      %div#article_options
+        %span 1XX Unread Items -
+        %span= link_to 'All items', '#none'
+        \|
+        %span= link_to 'Mark all as read', '#none'
+        \|
+        %span= link_to 'Refresh', '#none'
+      %div#articles
+        %p.article
+          %span.unread_title Article XX
+          \-
+          %span.summary Blablablablabla
+          %span.date 3 hours
+
+        %p.article
+          %span.unread_title Article XX
+          \-
+          %span.summary Blablablablabla
+          %span.date 3 hours
+        %p.article
+          %span.title Article XX
+          \-
+          %span.summary Blablablablabla
+          %span.date 3 hours
+        %div.article
+          %span.title Article XX
+          \-
+          %span.summary Blablablablabla
+          %span.date 3 hours
