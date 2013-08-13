@@ -10,7 +10,7 @@
 
   - @channels.each do |channel|
     %tr
-      %td= channel.name
+      %td= link_to channel.name, user_channel_articles_list_url(channel)
       %td= channel.url
       %td= link_to 'Show', user_channel_path(channel)
       %td= link_to 'Edit', edit_user_channel_path(channel)

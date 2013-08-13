@@ -2,7 +2,9 @@ RssReader::Application.routes.draw do
   devise_for :users
 
   namespace :user do
-    resources :channels
+    resources :channels do
+      get 'articles_list' => 'articles#articles_list'
+    end
   end
 
   # The priority is based upon order of creation:
