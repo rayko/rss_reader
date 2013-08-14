@@ -19,44 +19,10 @@
   %div#float_warpper
     %div#left_panel
       %div#special_channels
-        %p= link_to 'All Items', '#none'
-        %p= link_to 'Starred Items', '#none'
+        = render :partial => 'user/channels/special_channels'
       %div#add_channel
-        %p= link_to 'Add Channel', '#none'
+        = render :partial => 'user/channels/form'
       %div#channel_list
-        %p= link_to 'Channel X', '#none'
-        %p= link_to 'Channel X', '#none'
-        %p= link_to 'Channel X', '#none'
-        %p= link_to 'Channel X', '#none'
-        %p= link_to 'Channel X', '#none'
-        %p= link_to 'Channel X', '#none'
+        Loading...
     %div#article_list
-      %div#article_options
-        %span 1XX Unread Items -
-        %span= link_to 'All items', '#none'
-        \|
-        %span= link_to 'Mark all as read', '#none'
-        \|
-        %span= link_to 'Refresh', '#none'
-      %div#articles
-        %p.article
-          %span.unread_title Article XX
-          \-
-          %span.summary Blablablablabla
-          %span.date 3 hours
-
-        %p.article
-          %span.unread_title Article XX
-          \-
-          %span.summary Blablablablabla
-          %span.date 3 hours
-        %p.article
-          %span.title Article XX
-          \-
-          %span.summary Blablablablabla
-          %span.date 3 hours
-        %div.article
-          %span.title Article XX
-          \-
-          %span.summary Blablablablabla
-          %span.date 3 hours
+      = render :partial => 'user/articles/articles_list'

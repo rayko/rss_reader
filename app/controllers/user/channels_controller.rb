@@ -7,7 +7,7 @@ class User::ChannelsController < ApplicationController
     @channels = Channel.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :partial => 'index', :layout => false }
       format.json { render json: @channels }
     end
   end

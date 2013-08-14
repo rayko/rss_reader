@@ -1,6 +1,5 @@
-= semantic_form_for @channel, :url => @channel_path do |f|
-  = f.inputs do
-    = f.input :url
-
-  = f.actions do
-    = f.action :submit, :as => :input, :label => 'Save'
+%p= link_to 'Add Channel', '#none', :class => 'channel_form_toggle'
+%div.add_channel_form
+  = form_for :channel, :url => user_channels_url do |f|
+    = f.text_field :url
+    = f.submit 'Add'

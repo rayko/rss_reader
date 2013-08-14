@@ -13,3 +13,20 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+
+// Channel form toggle
+$(function(){
+    $('.channel_form_toggle').click(function(){
+        $('.add_channel_form').slideToggle();
+    });
+});
+
+// Channel list load
+$(document).ready(function(){
+    $('#channel_list').load('user/channels', function(){
+        $('.channel_link').click(function(){
+            $('#article_list').load('user/channels/' + this.attributes['_data-id'].value + '/articles_list')
+        });
+    });
+})
