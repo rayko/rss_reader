@@ -1,27 +1,46 @@
 %div#article_options
-  %span 1XX Unread Items -
-  %span= link_to 'All items', '#none'
-  \|
-  %span= link_to 'Mark all as read', '#none'
-  \|
-  %span= link_to 'Refresh', '#none'
+  - if @channel
+    %span.channel_name
+      = @channel.name
+      \|
+    %span
+      %i
+        - if @unread_count
+          %span.unread_count
+            = @unread_count
+          %span Unread Items
+        - else
+          %span.unread_count 0
+          %span Unread Items
+      \-
+      %span= link_to 'All items', '#none', '_data-path' => user_channel_articles_list_url(@channel.id, :fetch => 'all'), :class => 'display_all_channel_articles'
+
+      - if @articles.any?
+        \|
+        %span= link_to 'Mark all as read', '#none', :class => 'mark_all_articles', '_data-channel_id' => @articles.first.channel_id
+        \|
+        %span= link_to 'Refresh', '#none', :class => 'refresh_channel_articles', '_data-channel_id' => @articles.first.channel_id
 
 %div#articles
-  - @articles.each do |article|
-    - if article.read
-      %p{:class => "article", "_data-id" => article.id, "_data-channel_id" => article.channel_id}
-        %span.title
-          = article.title
-        %span.summary
-          = article.description
-        %span.date
-          = distance_of_time_in_words_to_now article.pub_date
+  - if @articles.any?
+    - @articles.each do |article|
+      - if article.read
+        %p{:class => "article", "_data-id" => article.id, "_data-channel_id" => article.channel_id}
+          %span.title
+            = article.title
+          %span.summary
+            = article.description
+          %span.date
+            = distance_of_time_in_words_to_now article.pub_date
 
-    - else
-      %p{:class => "article unread", "_data-id" => article.id, "_data-channel_id" => article.channel_id}
-        %span.title
-          = article.title
-        %span.summary
-          = article.description
-        %span.date
-          = distance_of_time_in_words_to_now article.pub_date
+      - else
+        %p{:class => "article unread", "_data-id" => article.id, "_data-channel_id" => article.channel_id}
+          %span.title
+            = article.title
+          %span.summary
+            = article.description
+          %span.date
+            = distance_of_time_in_words_to_now article.pub_date
+  - else
+    %p.no_articles
+      No articles to display

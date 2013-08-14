@@ -26,20 +26,57 @@ $(function(){
 $(document).ready(function(){
     $('#channel_list').load('user/channels', function(){
         $('.channel_link').click(function(){
-            $('#article_list').load('user/channels/' + this.attributes['_data-id'].value + '/articles_list', function(){
-                $('.article').click(function(){
-                    var article = this;
-                    $.ajax({
-                        url: 'user/channels/' + this.attributes['_data-channel_id'].value + '/articles/' + this.attributes['_data-id'].value + '/mark_as_read',
-                        type: 'GET',
-                        dataType: 'json',
-                        contentType: 'application/json; charset=utf-8',
-                        success: function(){
-                            article.classList.remove('unread');
-                        }
-                    });
-                });
-            });
+            var path = 'user/channels/' + this.attributes['_data-id'].value + '/articles_list'
+            load_articles(path);
         });
     });
 });
+
+function load_articles(path){
+    $('#article_list').load(path, function(){
+        $('.article').click(article_click_events);
+        $('.refresh_channel_articles').click(function(){
+            return load_articles(path);
+        });
+        $('.display_all_channel_articles').click(function(){
+            var path = this.attributes['_data-path'].value;
+            load_articles(path);
+        });
+        $('.mark_all_articles').click(function(){
+            var channel_id = this.attributes['_data-channel_id'].value
+            $.ajax({
+                url: 'user/channels/' + channel_id + '/articles/mark_all',
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function(data){
+                    if(data=='success'){
+                        $('.unread').removeClass('unread');
+                        $('.unread_count').html('0');
+                    }
+                }
+            });
+        });
+    })
+};
+
+function article_click_events(){
+    var article = this;
+    if(this.classList.contains('unread')){
+        $.ajax({
+            url: 'user/channels/' + this.attributes['_data-channel_id'].value + '/articles/' + this.attributes['_data-id'].value + '/mark_as_read',
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function(data){
+                article.classList.remove('unread');
+                if(data == 'success'){
+                    var counter = $('.unread_count').text()
+                    $('.unread_count').html(parseInt(counter) - 1);
+                }
+            }
+        });
+    };
+
+
+};
