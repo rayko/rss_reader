@@ -19,4 +19,14 @@ class Article < ActiveRecord::Base
   def mark_as_read
     self.update_attribute :read, true
   end
+
+  def toggle_starred
+    if self.starred
+      self.update_attribute :starred, false
+    else
+      self.update_attribute :starred, true
+    end
+
+  end
+
 end

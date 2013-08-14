@@ -9,8 +9,11 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require jquery.ui.all
  *= require_tree .
 
+@import jquery.ui.core
+@import jquery.ui.theme
 @import "formtastic"
 @import "formtastic_ie6"
 @import "formtastic_ie7"
@@ -131,6 +134,9 @@ body
   .title
     display: block
     margin-bottom: 5px
+  .star
+    float: left
+    margin-right: 5px
 
 .no_articles
   padding: 10px

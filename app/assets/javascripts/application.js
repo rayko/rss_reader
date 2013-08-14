@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.all
 //= require_tree .
 
 
@@ -26,7 +27,7 @@ $(function(){
 $(document).ready(function(){
     $('#channel_list').load('user/channels', function(){
         $('.channel_link').click(function(){
-            var path = 'user/channels/' + this.attributes['_data-id'].value + '/articles_list'
+            var path = this.attributes['_data-path'].value
             load_articles(path);
         });
     });
@@ -42,10 +43,26 @@ function load_articles(path){
             var path = this.attributes['_data-path'].value;
             load_articles(path);
         });
-        $('.mark_all_articles').click(function(){
-            var channel_id = this.attributes['_data-channel_id'].value
+        $('.star').click(function(){
+            var element = $(this).find('.ui-icon')
+            var path = element.attr('_data-path')
             $.ajax({
-                url: 'user/channels/' + channel_id + '/articles/mark_all',
+                url: path,
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function(data){
+                    if(data=='success'){
+                        element.toggleClass('ui-state-default ui-state-active')
+                    }
+                }
+            });
+
+        });
+        $('.mark_all_articles').click(function(){
+            var path = this.attributes['_data-path'].value
+            $.ajax({
+                url: path,
                 type: 'GET',
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
@@ -64,7 +81,7 @@ function article_click_events(){
     var article = this;
     if(this.classList.contains('unread')){
         $.ajax({
-            url: 'user/channels/' + this.attributes['_data-channel_id'].value + '/articles/' + this.attributes['_data-id'].value + '/mark_as_read',
+            url: this.attributes['_data-path'].value,
             type: 'GET',
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',

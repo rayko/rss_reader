@@ -1,0 +1,15 @@
+%span.star.ui-widget
+  - if article.starred
+    = link_to 'Star', '#none', :class => 'ui-icon ui-icon-star ui-state-active ui-corner-all', '_data-path' => user_channel_article_toggle_starred_url(@channel.id, article.id)
+  - else
+    = link_to 'Star', '#none', :class => 'ui-icon ui-icon-star ui-state-default ui-corner-all', '_data-path' => user_channel_article_toggle_starred_url(@channel.id, article.id)
+%span.title
+  = link_to article.title, article.link
+%span.summary
+  = article.description
+%span.date
+  Published
+  = distance_of_time_in_words_to_now article.pub_date
+  ago
+%span.article_links
+  = link_to 'Comments', '#none'
