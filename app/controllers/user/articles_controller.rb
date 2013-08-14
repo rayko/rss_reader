@@ -34,4 +34,14 @@ class User::ArticlesController < ApplicationController
       format.json { render :json => :success }
     end
   end
+
+  def toggle_starred
+    @article = Article.find params[:id]
+    if @article
+      @article.toggle_starred
+    end
+    respond_to do |format|
+      format.json { render :json => :success }
+    end
+  end
 end
