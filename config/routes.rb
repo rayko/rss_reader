@@ -4,6 +4,7 @@ RssReader::Application.routes.draw do
   namespace :user do
     get 'articles/full_list' => 'articles#full_list'
     get 'articles/starred' => 'articles#starred'
+    get 'channels/list' => 'channels#list'
     resources :channels do
       get 'articles_list' => 'articles#articles_list'
       get 'articles/:id/mark_as_read' => 'articles#mark_as_read', :as => :article_mark_as_read

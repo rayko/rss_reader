@@ -36,7 +36,7 @@ $(function(){
 
 // Channel list load
 $(document).ready(function(){
-    $('#channel_list').load('user/channels', function(){
+    $('#channel_list').load('user/channels/list', function(){
         $('.channel_link').click(function(){
             var path = this.attributes['_data-path'].value
             load_articles(path);

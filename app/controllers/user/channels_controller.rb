@@ -4,10 +4,18 @@ class User::ChannelsController < ApplicationController
   # GET /channels
   # GET /channels.json
   def index
-    @channels = Channel.all
+    @channels = current_user.channels
 
     respond_to do |format|
-      format.html { render :partial => 'index', :layout => false }
+      format.html
+      format.json { render json: @channels }
+    end
+  end
+
+  def list
+    @channels = current_user.channels
+    respond_to do |format|
+      format.html { render :partial => 'list', :layout => false }
       format.json { render json: @channels }
     end
   end
