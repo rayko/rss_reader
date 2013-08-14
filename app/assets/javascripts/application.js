@@ -23,6 +23,17 @@ $(function(){
     });
 });
 
+// Special channel options
+$(function(){
+    $('.full_articles_list').click(function(){
+        load_articles(this.attributes['_data-path'].value);
+    });
+    $('.starred_articles').click(function(){
+        load_articles(this.attributes['_data-path'].value);
+    });
+
+});
+
 // Channel list load
 $(document).ready(function(){
     $('#channel_list').load('user/channels', function(){

@@ -3,8 +3,8 @@ class Channel < ActiveRecord::Base
 
   belongs_to :user
 
-  before_save :validate_feed
-  after_save :perform_first_fetch
+  before_create :validate_feed
+  after_create :perform_first_fetch
 
   require 'feed_manager'
 
@@ -13,6 +13,10 @@ class Channel < ActiveRecord::Base
   def update_feed
     feed = FeedManager.new.get_items self.url
     Article.add_from_feed_items feed.items, self.id
+  end
+
+  def starred_articles
+    self.articles.select{ |a| a.starred }
   end
 
   private

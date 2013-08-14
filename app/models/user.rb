@@ -25,4 +25,22 @@ class User < ActiveRecord::Base
       where(conditions).first
     end
   end
+
+  # Fetch all user articles
+  def all_articles
+    articles = []
+    self.channels.each do |channel|
+      articles << channel.articles
+    end
+    return articles.flatten
+  end
+
+  # Fetch starred articles
+  def starred_articles
+    articles = []
+    self.channels.each do |channel|
+      articles << channel.starred_articles
+    end
+    return articles.flatten
+  end
 end
