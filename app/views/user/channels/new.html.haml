@@ -1,5 +1,8 @@
 %h1 New channel
 
-= render 'form'
+= semantic_form_for @channel, :url => user_channels_url do |form|
+  = form.inputs :url
+  = form.actions do
+    = form.action :submit, :label => 'Add'
 
 = link_to 'Back', user_channels_path

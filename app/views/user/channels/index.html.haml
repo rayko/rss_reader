@@ -1,5 +1,26 @@
-- if @channels.any?
-  - @channels.each do |channel|
-    %p= link_to channel.name, '#none', :class => 'channel_link', '_data-path' => user_channel_articles_list_url(channel.id)
-- else
-  %p No channels, try adding one
+%h1 Channels List
+
+%table
+  %tr
+    %th Name
+    %th Feed Url
+    %th Items
+    %th
+    %th
+    %th
+
+  - if @channels.any?
+    - @channels.each do |channel|
+      %tr
+        %td= channel.name
+        %td= channel.url
+        %td= channel.articles.size
+        %td= link_to 'Show', user_channel_url(channel)
+        %td= link_to 'Edit', edit_user_channel_url(channel)
+        %td= link_to 'Destroy', user_channel_url(channel), :method => :delete
+  - else
+    %tr
+      %td
+        %i No channels to display, try adding one.
+
+%p= link_to 'Add Channel', new_user_channel_url

@@ -1,7 +1,10 @@
 %h1 Editing channel
 
-= render 'form'
+= semantic_form_for @channel, :url => user_channel_url(@channel) do |form|
+  = form.inputs :name, :url
+  = form.actions do
+    = form.action :submit, :label => 'Save'
 
-= link_to 'Show', @channel
+= link_to 'Show', user_channel_url(@channel)
 \|
-= link_to 'Back', channels_path
+= link_to 'Back', user_channels_url
