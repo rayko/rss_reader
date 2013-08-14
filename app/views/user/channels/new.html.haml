@@ -1,8 +1,13 @@
-%h1 New channel
+%div#channel_container
+  %div#edit_content
+    %h3.channel_titles New Channel
 
-= semantic_form_for @channel, :url => user_channels_url do |form|
-  = form.inputs :url
-  = form.actions do
-    = form.action :submit, :label => 'Add'
+  %div.content_block
 
-= link_to 'Back', user_channels_path
+    = semantic_form_for @channel, :url => user_channels_url do |form|
+      = form.inputs :url
+      = form.actions do
+        = form.action :submit, :label => 'Add'
+
+  %p.channel_links
+    = link_to 'Back', user_channels_path
