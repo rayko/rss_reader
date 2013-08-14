@@ -1,17 +1,15 @@
-%div#channel_container
-  %div#show_content
-    %h3.channel_titles Channel Information
+%h3.channel_titles Channel Information
 
-    %div.content_block
-      %p
-        %b Title:
-        = @channel.name
-      %p
-        %b Url:
-        = @channel.url
+%div.content_block
+  %p
+    %b Title:
+    = @channel.name
+  %p
+    %b Url:
+    = @channel.url
 
 
-    %p.channel_links
-      = link_to 'Edit', edit_user_channel_path(@channel)
-      \|
-      = link_to 'Back', user_channels_path
+%p.channel_links
+  = link_to 'Edit', edit_user_channel_path(@channel)
+  \|
+  = link_to 'Back', user_channels_path

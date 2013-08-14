@@ -1,28 +1,27 @@
-%div#channel_container
-  %div#index_content
-    %h3.channel_titles Channels List
+%h3.channel_titles Channels List
 
-    %table
+%table
+  %tr
+    %th Name
+    %th Feed Url
+    %th Items
+    %th
+    %th
+    %th
+
+  - if @channels.any?
+    - @channels.each do |channel|
       %tr
-        %th Name
-        %th Feed Url
-        %th Items
-        %th
-        %th
-        %th
+        %td= channel.name
+        %td= channel.url
+        %td= channel.articles.size
+        %td= link_to 'Show', user_channel_url(channel)
+        %td= link_to 'Edit', edit_user_channel_url(channel)
+        %td= link_to 'Destroy', user_channel_url(channel), :method => :delete
+  - else
+    %tr
+      %td
+        %i No channels to display, try adding one.
 
-      - if @channels.any?
-        - @channels.each do |channel|
-          %tr
-            %td= channel.name
-            %td= channel.url
-            %td= channel.articles.size
-            %td= link_to 'Show', user_channel_url(channel)
-            %td= link_to 'Edit', edit_user_channel_url(channel)
-            %td= link_to 'Destroy', user_channel_url(channel), :method => :delete
-      - else
-        %tr
-          %td
-            %i No channels to display, try adding one.
-
-    %p.channel_links= link_to 'Add Channel', new_user_channel_url
+%p.channel_links
+  = link_to 'Add Channel', new_user_channel_url

@@ -1,4 +1,6 @@
 class User::ChannelsController < ApplicationController
+  layout  'channels'
+
   # Authentication check
 
   # GET /channels
