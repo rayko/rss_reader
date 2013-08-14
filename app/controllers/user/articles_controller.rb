@@ -44,4 +44,20 @@ class User::ArticlesController < ApplicationController
       format.json { render :json => :success }
     end
   end
+
+  def full_list
+    @articles = current_user.all_articles
+    @unread_count = @articles.select{ |a| !a.read }.size
+    respond_to do |format|
+      format.html { render :partial => 'articles_list', :layout => false}
+    end
+  end
+
+  def starred
+    @articles = current_user.starred_articles
+    @unread_count = @articles.select{ |a| !a.read }.size
+    respond_to do |format|
+      format.html { render :partial => 'articles_list', :layout => false}
+    end
+  end
 end
