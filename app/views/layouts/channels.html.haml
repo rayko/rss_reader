@@ -10,4 +10,6 @@
     //= render :partial => 'application/logo'
     = render :partial => 'application/nav'
     %div#main_container
-      = yield
+      %div#channel_container
+        %div#content
+          = yield

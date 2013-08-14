@@ -1,9 +1,13 @@
-%h2 Sign up
+%div#users_container
+  %div#new_content
+    %h3.users_titles Sign up
 
-= semantic_form_for resource, :as => resource_name, :url => registration_path(resource_name) do |form|
-  = devise_error_messages!
-  = form.inputs :first_name, :last_name, :username, :email, :password, :password_confirmation
-  = form.actions do
-    = form.action :submit, :label => 'Submit'
+  %div.content_block
 
-= render "users/shared/links"
+    = semantic_form_for resource, :as => resource_name, :url => registration_path(resource_name) do |form|
+      = devise_error_messages!
+      = form.inputs :first_name, :last_name, :username, :email, :password, :password_confirmation
+      = form.actions do
+        = form.action :submit, :label => 'Submit'
+
+  = render "users/shared/links"

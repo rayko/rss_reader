@@ -1,15 +1,13 @@
-%div#channel_container
-  %div#edit_content
-    %h3.channel_titles Editing channel
+%h3.channel_titles Editing channel
 
-  %div.content_block
+%div.content_block
 
-    = semantic_form_for @channel, :url => user_channel_url(@channel) do |form|
-      = form.inputs :name, :url
-      = form.actions do
-        = form.action :submit, :label => 'Save'
+  = semantic_form_for @channel, :url => user_channel_url(@channel) do |form|
+    = form.inputs :name, :url
+    = form.actions do
+      = form.action :submit, :label => 'Save'
 
-  %p.channel_links
-    = link_to 'Show', user_channel_url(@channel)
-    \|
-    = link_to 'Back', user_channels_url
+%p.channel_links
+  = link_to 'Show', user_channel_url(@channel)
+  \|
+  = link_to 'Back', user_channels_url
