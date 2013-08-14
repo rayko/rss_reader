@@ -26,7 +26,20 @@ $(function(){
 $(document).ready(function(){
     $('#channel_list').load('user/channels', function(){
         $('.channel_link').click(function(){
-            $('#article_list').load('user/channels/' + this.attributes['_data-id'].value + '/articles_list')
+            $('#article_list').load('user/channels/' + this.attributes['_data-id'].value + '/articles_list', function(){
+                $('.article').click(function(){
+                    var article = this;
+                    $.ajax({
+                        url: 'user/channels/' + this.attributes['_data-channel_id'].value + '/articles/' + this.attributes['_data-id'].value + '/mark_as_read',
+                        type: 'GET',
+                        dataType: 'json',
+                        contentType: 'application/json; charset=utf-8',
+                        success: function(){
+                            article.classList.remove('unread');
+                        }
+                    });
+                });
+            });
         });
     });
-})
+});

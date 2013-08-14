@@ -7,4 +7,14 @@ class User::ArticlesController < ApplicationController
       format.html { render :partial => 'articles_list', :layout => false}
     end
   end
+
+  def mark_as_read
+    @article = Article.find params[:id]
+    unless @article.read
+      @article.mark_as_read
+    end
+    respond_to do |format|
+      format.json { render :json => :success}
+    end
+  end
 end

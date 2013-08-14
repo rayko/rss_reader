@@ -15,4 +15,8 @@ class Article < ActiveRecord::Base
       self.create :link => item.url, :pub_date => item.pub_date, :description => item.description, :title => item.title, :channel_id => channel_id if item.pub_date > last_article.put_date
     end
   end
+
+  def mark_as_read
+    self.update_attribute :read, true
+  end
 end

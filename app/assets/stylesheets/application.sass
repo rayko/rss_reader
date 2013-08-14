@@ -96,6 +96,7 @@ body
     display: none
     #channel_url
       width: 75%
+
 #channel_list
   +rounded-borders
   background-color: #8ad9ef
@@ -127,9 +128,10 @@ body
   .summary
     display: block
     color: #888888
-  .unread
-    font-weight: bold
   .title
     display: block
     margin-bottom: 5px
-    text-decoration: normal
+
+.unread
+  span.title
+    font-weight: bold
