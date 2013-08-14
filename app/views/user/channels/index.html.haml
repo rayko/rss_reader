@@ -1,0 +1,5 @@
+- if @channels.any?
+  - @channels.each do |channel|
+    %p= link_to channel.name, '#none', :class => 'channel_link', '_data-path' => user_channel_articles_list_url(channel.id)
+- else
+  %p No channels, try adding one
