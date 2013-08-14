@@ -8,14 +8,20 @@
 
 %div#articles
   - @articles.each do |article|
-    %p.article
-      - if article.read?
+    - if article.read
+      %p{:class => "article", "_data-id" => article.id, "_data-channel_id" => article.channel_id}
         %span.title
           = article.title
-      - else
-        %span.title.unread
+        %span.summary
+          = article.description
+        %span.date
+          = distance_of_time_in_words_to_now article.pub_date
+
+    - else
+      %p{:class => "article unread", "_data-id" => article.id, "_data-channel_id" => article.channel_id}
+        %span.title
           = article.title
-      %span.summary
-        = article.description
-      %span.date
-        = distance_of_time_in_words_to_now article.pub_date
+        %span.summary
+          = article.description
+        %span.date
+          = distance_of_time_in_words_to_now article.pub_date
