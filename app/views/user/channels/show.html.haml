@@ -1,12 +1,12 @@
-%p#notice= notice
+%h1 Channel Information
 
 %p
   %b Title:
-  = @channel.title
+  = @channel.name
 %p
   %b Url:
   = @channel.url
 
-= link_to 'Edit', edit_channel_path(@channel)
+= link_to 'Edit', edit_user_channel_path(@channel)
 \|
-= link_to 'Back', channels_path
+= link_to 'Back', user_channels_path
