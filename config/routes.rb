@@ -5,6 +5,7 @@ RssReader::Application.routes.draw do
     resources :channels do
       get 'articles_list' => 'articles#articles_list'
       get 'articles/:id/mark_as_read' => 'articles#mark_as_read'
+      get 'articles/mark_all' => 'articles#mark_all'
     end
   end
 
