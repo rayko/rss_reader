@@ -11,6 +11,9 @@ gem 'formtastic'
 gem 'feedzirra'
 gem 'jquery-ui-sass-rails'
 gem 'jquery-ui-rails'
+gem 'omniauth'
+gem 'omniauth-google'
+gem 'omniauth-twitter'
 
 
 # Gems used only for assets and not required
