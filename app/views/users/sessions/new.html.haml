@@ -10,7 +10,7 @@
             = form.input :remember_me, :as => :boolean
         = form.actions do
           = form.action :submit, :label => 'Sign In'
-      %p
-        Or sign in using
-      = link_to (image_tag 'sign-in-with-twitter-gray.png'), user_omniauth_authorize_path(:twitter), :class => 'twitter_button'
+      %p.login_buttons
+        = link_to (image_tag 'sign-in-with-twitter-gray.png'), user_omniauth_authorize_path(:twitter), :class => 'twitter_button'
+        = link_to (image_tag 'google-login-button.png'), user_omniauth_authorize_path(:google_oauth2), :class => 'google_button'
     = render "users/shared/links"

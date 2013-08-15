@@ -12,7 +12,7 @@ gem 'feedzirra'
 gem 'jquery-ui-sass-rails'
 gem 'jquery-ui-rails'
 gem 'omniauth'
-gem 'omniauth-google'
+gem 'omniauth-google-oauth2'
 gem 'omniauth-twitter'
 
 
