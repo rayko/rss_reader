@@ -8,7 +8,7 @@ class Channel < ActiveRecord::Base
 
   require 'feed_manager'
 
-  has_many :articles
+  has_many :articles, :dependent => :delete_all
 
   def update_feed
     feed = FeedManager.new.get_items self.url
