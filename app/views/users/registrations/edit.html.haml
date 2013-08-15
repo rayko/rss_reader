@@ -8,8 +8,7 @@
         %p
           Currently waiting confirmation for: #{resource.unconfirmed_email}
 
-      = semantic_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |form|
-        = devise_error_messages!
+      = semantic_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true }) do |form|
         = form.inputs do
           = form.input :first_name
           = form.input :last_name
@@ -19,6 +18,12 @@
             = form.input :password, :hint => "leave it blank if you don't want to change it"
             = form.input :password_confirmation
             = form.input :current_password, :hint => "we need your current password to complete your changes", :required => true
+          = form.input :avatar
+          - if @user.avatar_file_name
+            %li.avatar_form_container
+              %label.avatar_label Current Avatar
+              = image_tag @user.avatar.url(:thumb), :class => 'user_avatar'
+
         = form.actions do
           = form.action :submit, :label => "Save"
 
