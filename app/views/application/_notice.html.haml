@@ -1,5 +1,12 @@
-%div#notice
-  %p.info
-    = notice
-  %p.alert
-    = alert
+%div#notice_container
+  -if flash[:notice]
+    %div.notice
+      %div.info
+        %div.ui-icon.ui-icon-info.notice_icon
+        %div.message= flash[:notice]
+
+  -if flash[:alert]
+    %div.notice
+      %div.alert.ui-widget
+        %div.ui-icon.ui-icon-alert.notice_icon
+        %div.message= flash[:alert]

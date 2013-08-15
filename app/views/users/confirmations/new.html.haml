@@ -3,12 +3,8 @@
     %h3.users_titles Resend Confirmation Instructions
 
     %div.content_block
-      %div.users_form
-        = form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
-          = devise_error_messages!
-          %div
-            = f.label :email
-            %br/
-            = f.email_field :email, :autofocus => true
-          %div= f.submit "Resend confirmation instructions"
+      = semantic_form_for resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post } do |form|
+        = form.inputs :email
+        = form.actions do
+          = form.action :submit, :label => 'Resend confirmation instructions'
     = render "users/shared/links"

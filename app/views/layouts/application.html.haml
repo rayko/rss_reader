@@ -8,6 +8,7 @@
   %body
     = render :partial => 'application/notice'
     //= render :partial => 'application/logo'
-    = render :partial => 'application/nav'
+    - if user_signed_in?
+      = render :partial => 'application/nav'
     %div#main_container
       = yield

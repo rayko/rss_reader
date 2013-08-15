@@ -16,6 +16,15 @@
 //= require_tree .
 
 
+// Notice slide
+$(function(){
+    if($('.notice').is(':visible')){
+        setTimeout(function(){
+            $('.notice').slideToggle()
+        }, 5000);
+    };
+})
+
 // Channel form toggle
 $(function(){
     $('.channel_form_toggle').click(function(){

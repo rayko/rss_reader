@@ -1,15 +1,10 @@
 %div#users_container
   %div#content
     %h3.users_titles Forgot your password?
-
-
     %div.content_block
       %div.users_form
-        = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
-          = devise_error_messages!
-          %div
-            = f.label :email
-            %br/
-            = f.email_field :email, :autofocus => true
-          %div= f.submit "Send me reset password instructions"
+        = semantic_form_for resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post } do |form|
+          = form.inputs :email
+          = form.actions do
+            = form.action :submit, :label => 'Send me reset password instruction'
     = render "users/shared/links"
