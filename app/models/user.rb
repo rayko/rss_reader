@@ -16,6 +16,10 @@ class User < ActiveRecord::Base
   # Relations
   has_many :channels
 
+  # Validations
+  validates :first_name, :last_name, :username, :presence => true, :length => { :maximum => 50 }
+  validates :username, :uniqueness => true
+
   # Devise custon lookup by login or email for authentication
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
