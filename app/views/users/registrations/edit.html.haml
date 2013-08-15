@@ -14,6 +14,7 @@
           = form.input :last_name
           = form.input :username
           = form.input :email, :hint => 'if you change it, you\'ll have to confirm the new email'
+          = form.input :profile_type, :include_blank => false
           - if current_user.provider.blank?
             = form.input :password, :hint => "leave it blank if you don't want to change it"
             = form.input :password_confirmation
