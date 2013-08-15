@@ -17,7 +17,7 @@
         %td= channel.articles.size
         %td= link_to 'Show', user_channel_url(channel)
         %td= link_to 'Edit', edit_user_channel_url(channel)
-        %td= link_to 'Destroy', user_channel_url(channel), :method => :delete
+        %td= link_to 'Destroy', user_channel_url(channel), :confirm => 'Are you sure?', :method => :delete
   - else
     %tr
       %td
