@@ -1,20 +1,14 @@
 %div#users_container
   %div#content
     %h3.users_titles Sign in
-    %div.content_block.users_form
-      = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-        %div
-          = f.label :login
-          %br/
-          = f.text_field :login, :autofocus => true
-        %div
-          = f.label :password
-          %br/
-          = f.password_field :password
-        - if devise_mapping.rememberable?
-          %div
-            = f.check_box :remember_me
-            = f.label :remember_me
-        %div= f.submit "Sign in"
+    %div.content_block
+      = semantic_form_for resource, :as => resource_name, :url => session_path(resource_name) do |form|
+        = form.inputs do
+          = form.input :login
+          = form.input :password
+          - if devise_mapping.rememberable?
+            = form.input :remember_me, :as => :boolean
+        = form.actions do
+          = form.action :submit, :label => 'Sign In'
 
-  = render "users/shared/links"
+    = render "users/shared/links"
