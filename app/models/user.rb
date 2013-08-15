@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   # Relations
-  has_many :channels
+  has_many :channels, :dependent => :destroy
   belongs_to :profile_type
 
   # Paperclip
