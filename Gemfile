@@ -14,6 +14,7 @@ gem 'jquery-ui-rails'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-twitter'
+gem 'paperclip'
 
 
 # Gems used only for assets and not required

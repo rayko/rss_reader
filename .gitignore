@@ -17,3 +17,7 @@
 # Ignore temp files from editors
 \#*
 \.#*
+
+# Ignore paperclip dinamic content
+app/assets/paperclip/*
+public/system/*

@@ -9,13 +9,16 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :first_name, :last_name, :username, :login, :provider,
-                  :name, :uid
+                  :name, :uid, :avatar
   # attr_accessible :title, :body
 
   attr_accessor :login
 
   # Relations
   has_many :channels
+
+  # Paperclip
+    has_attached_file :avatar, :styles => { :large => "400x400", :medium => "200x200>", :thumb => "100x100>" }
 
   # Validations
   validates :first_name, :last_name, :username, :presence => true, :length => { :maximum => 50 }

@@ -58,5 +58,8 @@ module RssReader
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Paperclip storage options
+    # config.paperclip_defaults = { :storage => :filesystem, :path => ":rails_root/app/assets/paperclip/:attachment/:id/:style/:basename.:extension" }
   end
 end
