@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130815075621) do
+ActiveRecord::Schema.define(:version => 20130815082100) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -32,6 +32,13 @@ ActiveRecord::Schema.define(:version => 20130815075621) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
+  end
+
+  create_table "profile_types", :force => true do |t|
+    t.string   "name"
+    t.integer  "channel_limit"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "sessions", :force => true do |t|
@@ -71,6 +78,7 @@ ActiveRecord::Schema.define(:version => 20130815075621) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer  "profile_type_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

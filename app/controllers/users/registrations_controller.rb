@@ -1,18 +1,13 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   def update
     # required for settings form to submit when password is left blank
-    if params[:user][:password].blank? && !current_user.provider.blank?
+    if params[:user][:password].blank?
       params[:user].delete("password")
       params[:user].delete("password_confirmation")
     end
 
     @user = User.find(current_user.id)
     prev_unconfirmed_email = @user.unconfirmed_email if @user.respond_to?(:unconfirmed_email)
-
-    if resource.update_with_password(account_update_params)
-
-    end
-
 
     if current_user.provider.blank?
       updated = @user.update_with_password(params[:user])

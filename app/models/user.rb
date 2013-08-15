@@ -9,13 +9,14 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :first_name, :last_name, :username, :login, :provider,
-                  :name, :uid, :avatar
+                  :name, :uid, :avatar, :profile_type, :profile_type_id
   # attr_accessible :title, :body
 
   attr_accessor :login
 
   # Relations
   has_many :channels
+  belongs_to :profile_type
 
   # Paperclip
     has_attached_file :avatar, :styles => { :large => "400x400", :medium => "200x200>", :thumb => "100x100>" }
@@ -23,6 +24,8 @@ class User < ActiveRecord::Base
   # Validations
   validates :first_name, :last_name, :username, :presence => true, :length => { :maximum => 50 }
   validates :username, :uniqueness => true
+
+  before_create :assign_profile_type
 
   # Devise custon lookup by login or email for authentication
   def self.find_first_by_auth_conditions(warden_conditions)
@@ -99,5 +102,10 @@ class User < ActiveRecord::Base
 
   def email_required?
     super && provider.blank?
+  end
+
+  private
+  def assign_profile_type
+    self.profile_type = ProfileType.default_profile
   end
 end
