@@ -4,11 +4,12 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable
+         :confirmable, :omniauthable, :omniauth_providers => [:twitter]
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :first_name, :last_name, :username, :login
+                  :first_name, :last_name, :username, :login, :provider,
+                  :name, :uid
   # attr_accessible :title, :body
 
   attr_accessor :login
@@ -46,5 +47,35 @@ class User < ActiveRecord::Base
       articles << channel.starred_articles
     end
     return articles.flatten
+  end
+
+
+
+  # Twitter authentication with omniauth
+  def self.find_for_twitter_oauth(auth, signed_in_resource=nil)
+    user = User.where(:provider => auth.provider, :uid => auth.uid).first
+    unless user
+      user = User.create(first_name:auth.info.name.split(' ').first,
+                         last_name:auth.info.name.split(' ').last,
+                         username:auth.info.nickname,
+                         provider:auth.provider,
+                         uid:auth.uid,
+                         password:Devise.friendly_token[0,20]
+                         )
+      user.confirm!
+    end
+    user
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.twitter_data"] && session["devise.twitter_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+    end
+  end
+
+  def email_required?
+    super && provider.blank?
   end
 end

@@ -1,5 +1,8 @@
 RssReader::Application.routes.draw do
-  devise_for :users
+  devise_for :users,
+  :controllers => {
+    :omniauth_callbacks => 'users/omniauth_callbacks',
+    :registrations => 'users/registrations' }
 
   namespace :user do
     get 'articles/full_list' => 'articles#full_list'
