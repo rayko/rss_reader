@@ -1,5 +1,6 @@
 class User::ArticlesController < ApplicationController
-  # Check Authentication
+
+  before_filter :authenticate_user!
 
   def articles_list
     if params[:fetch] == 'all'

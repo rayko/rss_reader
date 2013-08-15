@@ -1,7 +1,7 @@
 class User::ChannelsController < ApplicationController
   layout  'channels'
 
-  # Authentication check
+  before_filter :authenticate_user!
 
   # GET /channels
   # GET /channels.json
@@ -57,6 +57,7 @@ class User::ChannelsController < ApplicationController
     @channel = Channel.new(params[:channel])
     respond_to do |format|
       if @channel.save
+        current_user.channels << @channel
         format.html { redirect_to user_channels_path, notice: 'Channel created.' }
         format.json { render json: @channel, status: :created, location: @channel }
       else
