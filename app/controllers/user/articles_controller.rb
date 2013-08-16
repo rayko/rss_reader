@@ -2,7 +2,7 @@ class User::ArticlesController < ApplicationController
 
   before_filter :authenticate_user!
 
-  def articles_list
+  def index
     if params[:fetch] == 'all'
       @articles = Article.where :channel_id => params[:channel_id]
     else
@@ -11,7 +11,7 @@ class User::ArticlesController < ApplicationController
     @channel = Channel.find params[:channel_id]
     @unread_count = @articles.select{ |a| !a.read }.size
     respond_to do |format|
-      format.html { render :partial => 'articles_list', :layout => false}
+      format.html { render :partial => 'index', :layout => false}
     end
   end
 
@@ -50,7 +50,7 @@ class User::ArticlesController < ApplicationController
     @articles = current_user.all_articles
     @unread_count = @articles.select{ |a| !a.read }.size
     respond_to do |format|
-      format.html { render :partial => 'articles_list', :layout => false}
+      format.html { render :partial => 'index', :layout => false}
     end
   end
 
@@ -58,7 +58,7 @@ class User::ArticlesController < ApplicationController
     @articles = current_user.starred_articles
     @unread_count = @articles.select{ |a| !a.read }.size
     respond_to do |format|
-      format.html { render :partial => 'articles_list', :layout => false}
+      format.html { render :partial => 'index', :layout => false}
     end
   end
 end

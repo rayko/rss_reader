@@ -79,6 +79,33 @@ function load_articles(path){
             });
 
         });
+        $.each($('.comment_section'), function(){
+            var section = this
+            var element_to_update = this.getElementsByClassName('article_comments');
+            var toggle_link = $(this.children.item('toggle_comments'));
+            var toggle_icon = toggle_link.find('.ui-icon');
+            $(toggle_link).click(function(){
+                $(toggle_icon).toggleClass('ui-icon-triangle-1-e ui-icon-triangle-1-s');
+                if($(toggle_icon).hasClass('ui-icon-triangle-1-e')){
+                    $(element_to_update).slideUp()
+                }
+                else{
+                    var path = this.attributes['_data-path'].value
+                    $(element_to_update).hide();
+                    $(element_to_update).load(path, function(){
+                        if($(section).find('.comment_form')){
+                            $(section).find('.new_comment').on('ajax:success', function(e, data, status, xhr){
+                                $(xhr.responseText).hide().appendTo($(section).find('.comments')).fadeIn(1000);
+                                this.reset();
+                            });
+                        };
+                    });
+                    $(element_to_update).slideDown();
+                };
+            });
+        });
+
+
         $('.mark_all_articles').click(function(){
             var path = this.attributes['_data-path'].value
             $.ajax({

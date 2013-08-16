@@ -1,8 +1,8 @@
 %span.star.ui-widget
   - if article.starred
-    = link_to 'Star', '#none', :class => 'ui-icon ui-icon-star ui-state-active ui-corner-all', '_data-path' => user_channel_article_toggle_starred_url(article.channel.id, article.id)
+    = link_to 'Star', '#none', :class => 'ui-icon ui-icon-star ui-state-active ui-corner-all', '_data-path' => toggle_starred_user_article_url(article.id)
   - else
-    = link_to 'Star', '#none', :class => 'ui-icon ui-icon-star ui-state-default ui-corner-all', '_data-path' => user_channel_article_toggle_starred_url(article.channel.id, article.id)
+    = link_to 'Star', '#none', :class => 'ui-icon ui-icon-star ui-state-default ui-corner-all', '_data-path' => toggle_starred_user_article_url(article.id)
 %span.title
   = link_to article.title, article.link
 %span.summary
@@ -11,5 +11,8 @@
   Published
   = distance_of_time_in_words_to_now article.pub_date
   ago
-%span.article_links
-  = link_to 'Comments', '#none'
+%div.comment_section
+  %a{:class => 'toggle_comments', '_data-path' => user_article_comments_url(article.id), :href => '#none'}
+    %span.ui-icon.ui-icon-triangle-1-e{:style => 'float: left'}
+    Comments
+  %div.article_comments
