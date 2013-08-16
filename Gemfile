@@ -17,6 +17,7 @@ gem 'omniauth-twitter'
 gem 'paperclip'
 gem 'mysql2',          '0.3.12b4'
 gem 'thinking-sphinx', '~> 3.0.2'
+gem 'activeadmin'
 
 # Gems used only for assets and not required
 # in production environments by default.
