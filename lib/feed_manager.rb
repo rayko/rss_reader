@@ -33,8 +33,7 @@ class FeedManager
                           :items => data.entries,
                           :url => data.url,
                           :feed_url => data.feed_url,
-                          :valid => true,
-                          :raw_feed => data
+                          :valid => true
           store_feed(feed)
           return feed
         else
@@ -51,18 +50,15 @@ class FeedManager
   def update_feed(url)
     feed = get_feed(url)
     if feed.valid?
-      unless feed.update_expired?
-        return feed.new_items
+      unless feed.expired?
+        return feed.items
       else
-        updated_feed = Feedzirra::Feed.update(feed.raw_feed)
-
-        # Ugly fix
-        if updated_feed.class == Array
-          feed.update(updated_feed)
-        else
-          feed.update(updated_feed.new_entries)
-        end
-        return feed.new_items
+        feed = Feed.new :title => data.title,
+                        :items => data.entries,
+                        :url => data.url,
+                        :feed_url => data.feed_url,
+                        :valid => true
+        return feed.items
       end
     end
   end
@@ -89,8 +85,7 @@ end
 
 class Feed
   attr_accessor :title, :items, :url, :feed_url, :valid,
-                :created_at, :raw_feed, :updated_at,
-                :new_items
+                :created_at
 
   def initialize(options)
     options[:title].blank? ? self.title = 'Untitled' : self.title = options[:title]
@@ -99,8 +94,6 @@ class Feed
     self.valid = options[:valid]
     self.items = []
     self.created_at = Time.now
-    self.raw_feed = options[:raw_feed]
-    self.new_items = []
 
     options[:items].each do |item|
       self.items << FeedItem.new(item.title, item.url, item.summary, item.published)
@@ -112,27 +105,8 @@ class Feed
   end
 
   def expired?
-    (Time.now - self.created_at) > 600 # 10 minutes
+    (Time.now - self.created_at) > 300 # 5 minutes
   end
-
-  def update(data)
-    self.updated_at = Time.now
-    self.new_items = []
-    data.each do |item|
-      new_item = FeedItem.new(data.title, data.url, data.description, data.pub)
-      self.new_items << new_item
-      self.items << new_item
-    end
-  end
-
-  def update_expired?
-    if self.updated_at
-      return (Time.now - self.updated_at) > 300 # 5 minutes
-    else
-      return true
-    end
-  end
-
 end
 
 class FeedItem
