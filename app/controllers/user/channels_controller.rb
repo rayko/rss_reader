@@ -55,13 +55,15 @@ class User::ChannelsController < ApplicationController
   # POST /channels.json
   def create
     @channel = Channel.new(params[:channel])
+    @channel.user_id = current_user.id
     respond_to do |format|
       if @channel.save
-        current_user.channels << @channel
         format.html { redirect_to user_channels_path, notice: 'Channel created.' }
         format.json { render json: @channel, status: :created, location: @channel }
       else
-        @channel_path = user_channels_path
+        if @channel.errors.messages[:base]
+          flash[:alert] = @channel.errors.messages[:base].first
+        end
         format.html { render action: "new" }
         format.json { render json: @channel.errors, status: :unprocessable_entity }
       end

@@ -10,6 +10,10 @@ class Channel < ActiveRecord::Base
 
   has_many :articles, :dependent => :delete_all
 
+  require "channel_uniq_url_validator"
+  validates_with ChannelLimitValidator
+  validates :url, :uniq_url => true
+
   def update_feed
     feed = FeedManager.new.get_items self.url
     Article.add_from_feed_items feed.items, self.id

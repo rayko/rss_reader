@@ -105,6 +105,10 @@ class User < ActiveRecord::Base
     super && provider.blank?
   end
 
+  def channel_limit
+    self.profile_type.channel_limit
+  end
+
   private
   def assign_profile_type
     self.profile_type = ProfileType.default_profile

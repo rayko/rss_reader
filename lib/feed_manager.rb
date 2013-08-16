@@ -46,6 +46,6 @@ class FeedItem
     self.title = title
     self.url = url
     self.description = description
-    self.pub_date = pub_date
+    self.pub_date = pub_date || DateTime.now
   end
 end
