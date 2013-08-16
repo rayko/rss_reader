@@ -45,7 +45,8 @@ $(function(){
 
 // Channel list load
 $(document).ready(function(){
-    $('#channel_list').load('user/channels/list', function(){
+    var path = $('#channel_list').attr('_data-path');
+    $('#channel_list').load(path, function(){
         $('.channel_link').click(function(){
             var path = this.attributes['_data-path'].value
             load_articles(path);
@@ -58,6 +59,12 @@ $(document).ready(function(){
     $('.search_form').find('form').on('ajax:success', function(e, data, satus, xhr){
         load_articles('', data);
     });
+});
+
+$(function(){
+    if($('#article_list.from_search')){
+        setup_article_links();
+    };
 });
 
 function load_articles(path, data){

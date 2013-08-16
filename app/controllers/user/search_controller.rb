@@ -7,7 +7,7 @@ class User::SearchController < ApplicationController
       @articles.select!{ |article| article.channel_id == params[:search][:channel_id].to_i }
     end
     respond_to do |format|
-      format.html { render :partial => 'user/articles/index' }
+      format.html { }
     end
   end
 
