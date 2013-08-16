@@ -34,9 +34,4 @@ class Article < ActiveRecord::Base
     self.channel.user_id == user.id
   end
 
-  def self.search(options)
-    if options[:channel_id].blank?
-    end
-  end
-
 end

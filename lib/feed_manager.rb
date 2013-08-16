@@ -32,6 +32,7 @@ class Feed
 
   def initialize(title, items, url, feed_url, valid)
     title.blank? ? self.title = 'Untitled' : title
+    debugger
     self.url = url
     self.feed_url =feed_url
     self.valid = valid
