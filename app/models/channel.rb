@@ -36,6 +36,7 @@ class Channel < ActiveRecord::Base
 
   def perform_first_fetch
     feed = FeedManager.new.get_items self.url
+    self.update_attribute :name, feed.title
     Article.create_from_feed_items feed.items, self.id
   end
 end
