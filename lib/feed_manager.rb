@@ -55,7 +55,14 @@ class FeedManager
         return feed.new_items
       else
         updated_feed = Feedzirra::Feed.update(feed.raw_feed)
-        feed.update(updated_feed)
+
+        # Ugly fix
+        debugger
+        if updated_feed.class == Array
+          feed.update(updated_feed)
+        else
+          feed.update(updated_feed.new_entries)
+        end
         return feed.new_items
       end
     end

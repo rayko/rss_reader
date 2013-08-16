@@ -16,8 +16,8 @@ class Channel < ActiveRecord::Base
   validates :url, :uniq_url => true, :valid_feed => true
 
   def update_feed
-    feed = FeedManager.instnace.get_items self.url
-    Article.add_from_feed_items feed.items, self.id
+    new_items = FeedManager.instance.update_feed self.url
+    Article.add_from_feed_items new_items, self.id
   end
 
   def starred_articles
@@ -26,7 +26,7 @@ class Channel < ActiveRecord::Base
 
   private
   def perform_first_fetch
-    feed = FeedManager.instance.get_items self.url
+    feed = FeedManager.instance.get_feed self.url
     self.update_attribute :name, feed.title
     Article.create_from_feed_items feed.items, self.id
   end
