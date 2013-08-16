@@ -3,7 +3,7 @@ class Channel < ActiveRecord::Base
 
   belongs_to :user
 
-  before_create :validate_feed
+  # before_create :validate_feed
   after_create :perform_first_fetch
 
   require 'feed_manager'
@@ -11,8 +11,9 @@ class Channel < ActiveRecord::Base
   has_many :articles, :dependent => :delete_all
 
   require "channel_uniq_url_validator"
+  require "channel_valid_feed_validator"
   validates_with ChannelLimitValidator
-  validates :url, :uniq_url => true
+  validates :url, :uniq_url => true, :valid_feed => true
 
   def update_feed
     feed = FeedManager.new.get_items self.url
