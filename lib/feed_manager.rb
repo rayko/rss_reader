@@ -11,8 +11,16 @@ class FeedManager
 
   def get_items(url)
     data = fetch_feed(url)
-    # validation pending
-    return Feed.new data.title, data.entries, data.url, data.feed_url, true
+
+    # Feed validation
+    # Feedzirra does the fetching and parsing with its own parsers,
+    # if Feedzirra returns nil after a fetch, the feed is not valid.
+    unless data.nil?
+      return Feed.new data.title, data.entries, data.url, data.feed_url, true
+    else
+      return Feed.new '', [], '', '', false
+    end
+
   end
 
   def update_feed(url)
@@ -23,10 +31,10 @@ class Feed
   attr_accessor :title, :items, :url, :feed_url, :valid
 
   def initialize(title, items, url, feed_url, valid)
-    self.title = title
+    self.title = title || 'Untitled'
     self.url = url
     self.feed_url =feed_url
-    self.valid = true
+    self.valid = valid
     self.items = []
 
     items.each do |item|
