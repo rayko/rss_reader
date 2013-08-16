@@ -6,7 +6,7 @@
 %span.title
   = link_to article.title, article.link
 %span.summary
-  = article.description
+  = raw article.description
 %span.date
   Published
   = distance_of_time_in_words_to_now article.pub_date
