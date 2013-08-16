@@ -50,7 +50,6 @@ class FeedManager
   # Returns the new articles fetched
   def update_feed(url)
     feed = get_feed(url)
-    debugger
     if feed.valid?
       unless feed.update_expired?
         return feed.new_items
