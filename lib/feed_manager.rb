@@ -106,7 +106,7 @@ class Feed
   end
 
   def expired?
-    (Time.now - self.created_at) > 600 # 5 minutes
+    (Time.now - self.created_at) > 600 # 10 minutes
   end
 
   def update(data)

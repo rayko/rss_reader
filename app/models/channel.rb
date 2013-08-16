@@ -16,7 +16,7 @@ class Channel < ActiveRecord::Base
   validates :url, :uniq_url => true, :valid_feed => true
 
   def update_feed
-    feed = FeedManager.new.get_items self.url
+    feed = FeedManager.instnace.get_items self.url
     Article.add_from_feed_items feed.items, self.id
   end
 
@@ -25,17 +25,8 @@ class Channel < ActiveRecord::Base
   end
 
   private
-  def validate_feed
-    feed = FeedManager.new.get_items self.url
-    if feed.valid?
-      feed.title.blank? ? self.name = 'Untitled' : self.name = feed.title
-    else
-      # rise exception?
-    end
-  end
-
   def perform_first_fetch
-    feed = FeedManager.new.get_items self.url
+    feed = FeedManager.instance.get_items self.url
     self.update_attribute :name, feed.title
     Article.create_from_feed_items feed.items, self.id
   end
