@@ -4,7 +4,7 @@
       = render :partial => 'user/channels/special_channels'
     %div#add_channel
       = render :partial => 'user/channels/form'
-    %div#channel_list
+    %div#channel_list{'_data-path' => user_channels_list_url}
       Loading...
   %div#article_list
     = render :partial => 'user/articles/index'

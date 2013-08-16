@@ -4,7 +4,9 @@ class User::SearchController < ApplicationController
   def search
     @articles = Article.search params[:search][:query]
     unless params[:search][:channel_id].blank?
-      @articles.select!{ |article| article.channel_id == params[:search][:channel_id].to_i }
+      @articles.search params[:search][:query], :with => { :channel_id => params[:search][:channel_id].to_i }
+    else
+      @articles.search params[:search][:query]
     end
     respond_to do |format|
       format.html { }
