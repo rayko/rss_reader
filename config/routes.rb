@@ -9,10 +9,16 @@ RssReader::Application.routes.draw do
     get 'articles/starred' => 'articles#starred'
     get 'channels/list' => 'channels#list'
     resources :channels do
-      get 'articles_list' => 'articles#articles_list'
-      get 'articles/:id/mark_as_read' => 'articles#mark_as_read', :as => :article_mark_as_read
-      get 'articles/mark_all' => 'articles#mark_all', :as => :articles_mark_all
-      get 'articles/:id/toggle_starred' => 'articles#toggle_starred', :as => :article_toggle_starred
+      resources :articles, :shallow => true, :only => [:index] do
+        collection do
+          get :mark_all
+        end
+        member do
+          get :mark_as_read
+          get :toggle_starred
+        end
+        resources :comments, :shallow => true, :only => [:index, :create]
+      end
     end
   end
 
