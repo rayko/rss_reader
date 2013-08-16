@@ -21,3 +21,9 @@
 # Ignore paperclip dinamic content
 app/assets/paperclip/*
 public/system/*
+
+# Ignore pids
+*.pid
+
+# Ignore Sphinx created indexes
+db/sphinx/*
