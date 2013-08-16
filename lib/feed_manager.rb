@@ -50,6 +50,7 @@ class FeedManager
   # Returns the new articles fetched
   def update_feed(url)
     feed = get_feed(url)
+    debugger
     if feed.valid?
       unless feed.update_expired?
         return feed.new_items
@@ -57,7 +58,6 @@ class FeedManager
         updated_feed = Feedzirra::Feed.update(feed.raw_feed)
 
         # Ugly fix
-        debugger
         if updated_feed.class == Array
           feed.update(updated_feed)
         else
@@ -103,7 +103,7 @@ class Feed
     self.raw_feed = options[:raw_feed]
     self.new_items = []
 
-    items.each do |item|
+    options[:items].each do |item|
       self.items << FeedItem.new(item.title, item.url, item.summary, item.published)
     end
   end
