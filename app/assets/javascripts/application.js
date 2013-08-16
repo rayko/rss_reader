@@ -32,6 +32,18 @@ $(function(){
     });
 });
 
+// Channel add
+$(document).ready(function(){
+    $('#fast_channel_add_form').on('ajax:success', function(e, data, status, xhr){
+        load_channels();
+        this.reset()
+    });
+    $('#fast_channel_add_form').on('ajax:error', function(e, data, status, xhr){
+        var message = "<span>" + JSON.parse(data.responseText)['url'][0] + "</span>"
+        $(message).appendTo($('#add_channel')).fadeOut(5000);
+    });
+});
+
 // Special channel options
 $(function(){
     $('.full_articles_list').click(function(){
@@ -45,6 +57,10 @@ $(function(){
 
 // Channel list load
 $(document).ready(function(){
+    load_channels();
+});
+
+function load_channels(){
     var path = $('#channel_list').attr('_data-path');
     $('#channel_list').load(path, function(){
         $('.channel_link').click(function(){
@@ -52,7 +68,7 @@ $(document).ready(function(){
             load_articles(path);
         });
     });
-});
+};
 
 // Search
 $(document).ready(function(){
