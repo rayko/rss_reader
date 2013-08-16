@@ -13,7 +13,7 @@ class Article < ActiveRecord::Base
   def self.add_from_feed_items items, channel_id
     last_article = self.last
     items.each do |item|
-      self.create :link => item.url, :pub_date => item.pub_date, :description => item.description, :title => item.title, :channel_id => channel_id if item.pub_date > last_article.put_date
+      self.create :link => item.url, :pub_date => item.pub_date, :description => item.description, :title => item.title, :channel_id => channel_id if item.pub_date > last_article.pub_date
     end
   end
 

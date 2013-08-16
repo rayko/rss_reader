@@ -31,8 +31,7 @@ class Feed
   attr_accessor :title, :items, :url, :feed_url, :valid
 
   def initialize(title, items, url, feed_url, valid)
-    title.blank? ? self.title = 'Untitled' : title
-    debugger
+    title.blank? ? self.title = 'Untitled' : self.title = title
     self.url = url
     self.feed_url =feed_url
     self.valid = valid
