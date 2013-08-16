@@ -291,6 +291,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   jquery-ui-sass-rails
+  meta_search
   mysql2 (= 0.3.12b4)
   omniauth
   omniauth-google-oauth2

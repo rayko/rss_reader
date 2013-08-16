@@ -1,8 +1,7 @@
 %div#nav
   - if user_signed_in?
-    - if params[:controller] == 'application'
-      %div.search_form
-        = render :partial => 'user/search/form'
+    %div.search_form
+      = render :partial => 'user/search/form'
     %div.nav_link
       = link_to 'Edit Profile', edit_user_registration_url
     %div.nav_link
