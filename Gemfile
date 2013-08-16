@@ -18,6 +18,7 @@ gem 'paperclip'
 gem 'mysql2',          '0.3.12b4'
 gem 'thinking-sphinx', '~> 3.0.2'
 gem 'activeadmin'
+gem 'whenever', :require => false
 
 # Gems used only for assets and not required
 # in production environments by default.
