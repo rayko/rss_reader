@@ -5,6 +5,7 @@ RssReader::Application.routes.draw do
     :registrations => 'users/registrations' }
 
   namespace :user do
+    post 'search'
     get 'articles/full_list' => 'articles#full_list'
     get 'articles/starred' => 'articles#starred'
     get 'channels/list' => 'channels#list'
