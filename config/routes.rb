@@ -80,5 +80,7 @@ RssReader::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
+  match '*not_found', to: 'application#error_404' unless Rails.application.config.consider_all_requests_local
   root :to => 'application#index'
+
 end

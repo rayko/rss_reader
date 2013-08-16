@@ -4,4 +4,9 @@ class ApplicationController < ActionController::Base
   def index
     @articles = []
   end
+
+  def error_404
+    flash[:alert] = 'Error 404: requested page not found.'
+    redirect_to root_path
+  end
 end
