@@ -1,7 +1,7 @@
 %div#nav
   - if user_signed_in?
     %div.search_form
-      %span Some search
+      = render :partial => 'user/search/form'
     %div.nav_link
       = link_to 'Edit Profile', edit_user_registration_url
     %div.nav_link
