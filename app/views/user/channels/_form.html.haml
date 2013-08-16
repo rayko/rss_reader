@@ -1,5 +1,4 @@
-%p= link_to 'Add Channel', '#none', :class => 'channel_form_toggle'
-%div.add_channel_form
-  = form_for :channel, :url => user_channels_url do |f|
-    = f.text_field :url
-    = f.submit 'Add'
+= semantic_form_form @channel do |form|
+  = form.inputs :url
+  = form.actions do
+    = form.action :submit, :label => 'Add'
