@@ -1,0 +1,5 @@
+%div.comment
+  %ul
+    %div.li_warpper
+      %li.header= "Posted #{distance_of_time_in_words_to_now comment.created_at} ago by #{comment.user_username}"
+      %li.text= comment.text
