@@ -18,12 +18,12 @@
       - each_page do |page|
         - if page.left_outer? || page.right_outer? || page.inside_window?
           %li= page_tag page
-        - elsif !page.was_truncated?
-          = gap_tag
+        //- elsif !page.was_truncated?
+        //  = gap_tag
 
       - if current_page.last?
-        %li.disable= next_page_tag unless current_page.last?
-        %li.disable= last_page_tag unless current_page.last?
+        %li.disable= next_page_tag
+        %li.disable= last_page_tag
       - else
-        %li= next_page_tag unless current_page.last?
-        %li= last_page_tag unless current_page.last?
+        %li= next_page_tag
+        %li= last_page_tag

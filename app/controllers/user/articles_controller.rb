@@ -4,12 +4,13 @@ class User::ArticlesController < ApplicationController
 
   def index
     if params[:fetch] == 'all'
-      @articles = Article.where :channel_id => params[:channel_id]
+      @articles = Article.where(:channel_id => params[:channel_id]).order(:created_at).page params[:page]
     else
-      @articles = Article.where :channel_id => params[:channel_id], :read => false
+      @articles = Article.where(:channel_id => params[:channel_id], :read => false).order(:created_at).page params[:page]
     end
     @channel = Channel.find params[:channel_id]
     @unread_count = @articles.select{ |a| !a.read }.size
+    @enable_pagination = true
     respond_to do |format|
       format.html { render :partial => 'index', :layout => false}
     end
