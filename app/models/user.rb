@@ -45,11 +45,7 @@ class User < ActiveRecord::Base
 
   # Fetch starred articles
   def starred_articles
-    articles = []
-    self.channels.each do |channel|
-      articles << channel.starred_articles
-    end
-    return articles.flatten
+    Article.where(:channel_id => self.channel_ids, :starred => true)
   end
 
   def articles_count

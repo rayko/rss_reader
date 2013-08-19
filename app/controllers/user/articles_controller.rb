@@ -47,7 +47,7 @@ class User::ArticlesController < ApplicationController
   end
 
   def full_list
-    @articles = current_user.all_articles.page params[:page]
+    @articles = current_user.all_articles.order(:created_at).page params[:page]
     @unread_count = @articles.select{ |a| !a.read }.size
     @custom_title = 'Displaying all articles'
     @enable_pagination = true
@@ -57,9 +57,10 @@ class User::ArticlesController < ApplicationController
   end
 
   def starred
-    @articles = current_user.starred_articles
+    @articles = current_user.starred_articles.order(:created_at).page params[:page]
     @unread_count = @articles.select{ |a| !a.read }.size
     @custom_title = 'Starred articles'
+    @enable_pagination = true
     respond_to do |format|
       format.html { render :partial => 'index', :layout => false}
     end
