@@ -1,42 +1,41 @@
-%div#article_list
-  %div#article_options
-    %ul.breadcrumb
-      - if @custom_title
-        %li
-          = @custom_title
-      - if @channel
-        %li.channel_name
-          = @channel.name
-          %span.divider /
-        %li
-          %i
-            - if @unread_count
-              %span.unread_count
-                = @unread_count
-                %span Unread Items
-            - else
-              %span.unread_count 0
+%div#article_options
+  %ul.breadcrumb
+    - if @custom_title
+      %li
+        = @custom_title
+    - if @channel
+      %li.channel_name
+        = @channel.name
+        %span.divider /
+      %li
+        %i
+          - if @unread_count
+            %span.unread_count
+              = @unread_count
               %span Unread Items
-          %span.divider /
+          - else
+            %span.unread_count 0
+            %span Unread Items
+        %span.divider /
+      %li
+        = link_to 'All items', '#none', '_data-path' => user_channel_articles_url(:channel_id => @channel.id, :fetch => 'all'), :class => 'display_all_channel_articles'
+      - if @articles.any?
         %li
-          = link_to 'All items', '#none', '_data-path' => user_channel_articles_url(:channel_id => @channel.id, :fetch => 'all'), :class => 'display_all_channel_articles'
-        - if @articles.any?
-          %li
-            %span.divider /
-            = link_to 'Mark all as read', '#none', :class => 'mark_all_articles', '_data-path' => mark_all_user_channel_articles_url(@channel.id)
-          %li
-            %span.divider /
-            = link_to 'Refresh', '#none', :class => 'refresh_channel_articles', '_data-path' => user_channel_articles_url(:channel_id => @channel.id)
+          %span.divider /
+          = link_to 'Mark all as read', '#none', :class => 'mark_all_articles', '_data-path' => mark_all_user_channel_articles_url(@channel.id)
+        %li
+          %span.divider /
+          = link_to 'Refresh', '#none', :class => 'refresh_channel_articles', '_data-path' => user_channel_articles_url(:channel_id => @channel.id)
 
-  %div#articles
-    - if @articles.any?
-      - @articles.each do |article|
-        - if article.read
-          %div{:class => "article well", "_data-path" => mark_as_read_user_article_url(article.id)}
-            = render :partial => 'user/articles/article', :locals => {:article => article}
-        - else
-          %div{:class => "article well unread", "_data-path" => mark_as_read_user_article_url(article.id)}
-            = render :partial => 'user/articles/article', :locals => {:article => article}
-    - else
-      %p.no_articles
-        No articles to display
+%div#articles
+  - if @articles.any?
+    - @articles.each do |article|
+      - if article.read
+        %div{:class => "article well", "_data-path" => mark_as_read_user_article_url(article.id)}
+          = render :partial => 'user/articles/article', :locals => {:article => article}
+      - else
+        %div{:class => "article well unread", "_data-path" => mark_as_read_user_article_url(article.id)}
+          = render :partial => 'user/articles/article', :locals => {:article => article}
+  - else
+    %p.no_articles
+      No articles to display
