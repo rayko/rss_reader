@@ -79,18 +79,18 @@ $(document).ready(function(){
 });
 
 $(function(){
-    if($('#article_list.from_search')){
+    if($('#dynamic_content.from_search')){
         setup_article_links();
     };
 });
 
 function load_articles(path, data){
     if(data){
-        $('#article_list').html(data);
+        $('#dynamic_content').html(data);
         setup_article_links();
     }
     else{
-        $('#article_list').load(path, function(){
+        $('#dynamic_content').load(path, function(){
             setup_article_links();
         })
     };
