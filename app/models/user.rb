@@ -40,11 +40,7 @@ class User < ActiveRecord::Base
 
   # Fetch all user articles
   def all_articles
-    articles = []
-    self.channels.each do |channel|
-      articles << channel.articles
-    end
-    return articles.flatten
+    Article.where(:channel_id => self.channel_ids)
   end
 
   # Fetch starred articles

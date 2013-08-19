@@ -47,9 +47,10 @@ class User::ArticlesController < ApplicationController
   end
 
   def full_list
-    @articles = current_user.all_articles
+    @articles = current_user.all_articles.page params[:page]
     @unread_count = @articles.select{ |a| !a.read }.size
     @custom_title = 'Displaying all articles'
+    @enable_pagination = true
     respond_to do |format|
       format.html { render :partial => 'index', :layout => false}
     end

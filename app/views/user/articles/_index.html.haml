@@ -36,6 +36,8 @@
       - else
         %div{:class => "article well unread", "_data-path" => mark_as_read_user_article_url(article.id)}
           = render :partial => 'user/articles/article', :locals => {:article => article}
+    - if @enable_pagination
+      = paginate @articles, :remote => true
   - else
     %p.no_articles
       No articles to display
