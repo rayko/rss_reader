@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require jquery.ui.all
 //= require_tree .
 
@@ -101,6 +102,7 @@ function load_articles(path, data){
 function setup_article_links(){
     $('.article').click(article_click_events);
     $('.refresh_channel_articles').click(function(){
+        var path = this.attributes['_data-path'].value;
         return load_articles(path);
     });
     $('.display_all_channel_articles').click(function(){

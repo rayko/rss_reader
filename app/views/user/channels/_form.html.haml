@@ -1,4 +1,3 @@
-= semantic_form_form @channel do |form|
-  = form.inputs :url
-  = form.actions do
-    = form.action :submit, :label => 'Add'
+= form_for @channel do |form|
+  = form.text_field :url
+  = form.submit 'Add', :class => 'btn'

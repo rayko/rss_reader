@@ -1,5 +1,4 @@
 class User::ChannelsController < ApplicationController
-  layout  'channels'
 
   before_filter :authenticate_user!
 
@@ -77,7 +76,7 @@ class User::ChannelsController < ApplicationController
 
     respond_to do |format|
       if @channel.update_attributes(params[:channel])
-        format.html { redirect_to @channel, notice: 'Channel was successfully updated.' }
+        format.html { redirect_to user_channels_url, notice: 'Channel was successfully updated.' }
         format.json { head :no_content }
       else
         @channel_path = user_channel_path(@channel)

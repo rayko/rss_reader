@@ -1,5 +1,5 @@
 class Channel < ActiveRecord::Base
-  attr_accessible :title, :url
+  attr_accessible :name, :url
 
   belongs_to :user
 
@@ -12,8 +12,9 @@ class Channel < ActiveRecord::Base
 
   require "channel_uniq_url_validator"
   require "channel_valid_feed_validator"
+  validates :url, :presence => true, :uniq_url => true, :valid_feed => true, :on => :create
   validates_with ChannelLimitValidator
-  validates :url, :uniq_url => true, :valid_feed => true
+
 
   def update_feed
     new_items = FeedManager.instance.update_feed self.url
@@ -22,6 +23,10 @@ class Channel < ActiveRecord::Base
 
   def starred_articles
     self.articles.select{ |a| a.starred }
+  end
+
+  def unread_articles_count
+    self.articles.select{ |a| !a.read }.size
   end
 
   private

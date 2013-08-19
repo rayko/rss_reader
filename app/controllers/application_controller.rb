@@ -3,6 +3,11 @@ class ApplicationController < ActionController::Base
 
   def index
     @articles = []
+    if user_signed_in?
+      @articles_count = current_user.articles_count
+      @starred_articles_count = current_user.starred_articles_count
+    end
+    @custom_title = 'Pick a channel'
   end
 
   def error_404

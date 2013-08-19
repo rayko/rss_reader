@@ -3,9 +3,9 @@
     - @comments.each do |comment|
       = render :partial => 'comment', :locals => {:comment => comment}
 %div.comment_form
-  = semantic_form_for :comment, :url => user_article_comments_url, :remote => true , :html => {:class => 'new_comment', 'data-target' => 'comments'} do |form|
-    = form.inputs do
-      = form.input :article_id, :as => :hidden, :input_html => {:value => @article.id}
-      = form.input :text, :as => :text, :label => 'Comment'
-    = form.actions do
-      = form.action :submit, :label => 'Add'
+
+  = form_for @comment, :url => user_article_comments_url, :remote => true, :html => {:class => 'new_comment', 'data-target' => 'comments'} do |form|
+    %fieldset
+      = form.hidden_field :article_id, :value => @comment.article_id
+      = form.text_area :text, :rows => 3, :class => 'input-block-level'
+      = form.submit 'Add', :class => 'btn'

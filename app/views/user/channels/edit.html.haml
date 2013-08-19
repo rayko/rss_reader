@@ -1,13 +1,8 @@
-%h3.channel_titles Editing channel
+= semantic_form_for @channel, :url => user_channel_url(@channel), :html => {:class => 'form-horizontal'} do |form|
+  = form.inputs :title => 'Edit Channel' do
+    = form.input :name
+  = form.actions do
+    = form.action :submit, :label => 'Save', :button_html => {:class => 'btn btn-primary', :disable_with => 'Saving...'}
 
-%div.content_block
-
-  = semantic_form_for @channel, :url => user_channel_url(@channel) do |form|
-    = form.inputs :name, :url
-    = form.actions do
-      = form.action :submit, :label => 'Save'
-
-%p.channel_links
-  = link_to 'Show', user_channel_url(@channel)
-  \|
-  = link_to 'Back', user_channels_url
+= link_to 'Show', user_channel_url(@channel), :class => 'btn'
+= link_to 'Back', user_channels_url, :class => 'btn'

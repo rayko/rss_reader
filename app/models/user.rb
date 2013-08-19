@@ -56,7 +56,13 @@ class User < ActiveRecord::Base
     return articles.flatten
   end
 
+  def articles_count
+    all_articles.size
+  end
 
+  def starred_articles_count
+    starred_articles.size
+  end
 
   # Twitter authentication with omniauth
   def self.find_for_twitter_oauth(auth, signed_in_resource=nil)

@@ -1,6 +1,5 @@
-= form_for :search, :url => user_search_url do |form|
-  Search:
-  = form.text_field :query, :size => 15, :class => 'query_input'
+= form_for :search, :url => user_search_url, :html => {:class => 'navbar-form'} do |form|
+  = form.text_field :query, :class => 'query_input'
   On:
   = form.select :channel_id, options_from_collection_for_select(current_user.channels, :id, :name), {:include_blank => 'All Channels'}
-  = form.submit 'Search'
+  = form.submit 'Search', :class => 'btn'
