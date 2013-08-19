@@ -73,10 +73,18 @@ function load_channels(){
 
 // Search
 $(document).ready(function(){
-    $('.search_form').find('form').on('ajax:success', function(e, data, satus, xhr){
+    $('.search_form').find('form').on('ajax:success', function(e, data, status, xhr){
         load_articles('', data);
     });
 });
+
+// Pagination
+function load_pagination_events(){
+    $('.pagination').find('a').on('ajax:success', function(e, data, status, xhr){
+        load_articles('', data);
+        $('html, body').animate({ scrollTop: 0 }, 'slow');
+    });
+};
 
 $(function(){
     if($('#dynamic_content.from_search')){
@@ -125,6 +133,7 @@ function setup_article_links(){
         });
 
     });
+    load_pagination_events();
     $.each($('.comment_section'), function(){
         var section = this
         var element_to_update = this.getElementsByClassName('article_comments');
