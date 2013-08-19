@@ -4,5 +4,6 @@
   = form.actions do
     = form.action :submit, :label => 'Save', :button_html => {:class => 'btn btn-primary', :disable_with => 'Saving...'}
 
-= link_to 'Show', user_channel_url(@channel), :class => 'btn'
-= link_to 'Back', user_channels_url, :class => 'btn'
+.btn-group
+  = link_to 'Show', user_channel_url(@channel), :class => 'btn'
+  = link_to 'Back', user_channels_url, :class => 'btn'

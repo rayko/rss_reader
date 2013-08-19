@@ -6,8 +6,6 @@
     %th Feed Url
     %th Items
     %th
-    %th
-    %th
 
   - if @channels.any?
     - @channels.each do |channel|
@@ -15,9 +13,11 @@
         %td= channel.name
         %td= channel.url
         %td= channel.articles.size
-        %td= link_to 'Show', user_channel_url(channel)
-        %td= link_to 'Edit', edit_user_channel_url(channel)
-        %td= link_to 'Destroy', user_channel_url(channel), :confirm => 'Are you sure?', :method => :delete
+        %td
+          .btn-group
+            = link_to 'Show', user_channel_url(channel), :class => 'btn btn-mini'
+            = link_to 'Edit', edit_user_channel_url(channel), :class => 'btn btn-mini'
+            = link_to 'Destroy', user_channel_url(channel), :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-danger btn-mini'
   - else
     %tr
       %td
