@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
   protected
   def layout_by_user_presence
-    if devise_controller?
+    if devise_controller? && !user_signed_in?
       'guest'
     else
       'application'

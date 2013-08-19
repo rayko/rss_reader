@@ -6,7 +6,7 @@
         - @channels.each do |channel|
           %li
             %a{:href => '#none', :class => 'channel_link', '_data-path' => user_channel_articles_url(channel.id)}
-              = channel.name
+              %span.channel_name= channel.name
               %span.badge.badge-success.pull-right= channel.unread_articles_count
       - else
         %li No channels, try adding one
