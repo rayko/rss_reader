@@ -1,16 +1,14 @@
-%div#users_container
-  %div#content
-    %h3.users_titles Sign in
-    %div.content_block
-      = semantic_form_for resource, :as => resource_name, :url => session_path(resource_name) do |form|
-        = form.inputs do
-          = form.input :login
-          = form.input :password
-          - if devise_mapping.rememberable?
-            = form.input :remember_me, :as => :boolean
-        = form.actions do
-          = form.action :submit, :label => 'Sign In'
-      %p.login_buttons
-        = link_to (image_tag 'sign-in-with-twitter-gray.png'), user_omniauth_authorize_path(:twitter), :class => 'twitter_button'
-        = link_to (image_tag 'google-login-button.png'), user_omniauth_authorize_path(:google_oauth2), :class => 'google_button'
-    = render "users/shared/links"
+= semantic_form_for resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-horizontal'} do |form|
+  = form.inputs :title => 'Sign in' do
+    = form.input :login
+    = form.input :password
+    - if devise_mapping.rememberable?
+      = form.input :remember_me, :as => :boolean
+  = form.actions do
+    = form.action :submit, :label => 'Sign In'
+
+%p.text-center
+  = link_to 'Sign in with Twitter', user_omniauth_authorize_path(:twitter), :class => 'btn btn-info btn-large'
+  = link_to 'Sing in with Google', user_omniauth_authorize_path(:google_oauth2), :class => 'btn btn-primary btn-large'
+
+= render "users/shared/links"

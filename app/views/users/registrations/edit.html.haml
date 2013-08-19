@@ -1,33 +1,29 @@
-%div#users_container
-  %div#content
-    %h3.users_titles
-      Edit Profile
+%div.content_block
 
-    %div.content_block
+
+
+  = semantic_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true, :class => 'form-horizontal' }) do |form|
+    = form.inputs :title => 'Edit Profile' do
       - if devise_mapping.confirmable? && resource.pending_reconfirmation?
         %p
           Currently waiting confirmation for: #{resource.unconfirmed_email}
+      = form.input :first_name
+      = form.input :last_name
+      = form.input :username
+      = form.input :email, :hint => 'if you change it, you\'ll have to confirm the new email'
+      = form.input :profile_type, :include_blank => false
+      - if current_user.provider.blank?
+        = form.input :password, :hint => "leave it blank if you don't want to change it"
+        = form.input :password_confirmation
+        = form.input :current_password, :hint => "we need your current password to complete your changes", :required => true
+      = form.input :avatar
+      - if @user.avatar_file_name
+        %li.avatar_form_container
+          %label.avatar_label Current Avatar
+          = image_tag @user.avatar.url(:thumb), :class => 'user_avatar'
 
-      = semantic_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true }) do |form|
-        = form.inputs do
-          = form.input :first_name
-          = form.input :last_name
-          = form.input :username
-          = form.input :email, :hint => 'if you change it, you\'ll have to confirm the new email'
-          = form.input :profile_type, :include_blank => false
-          - if current_user.provider.blank?
-            = form.input :password, :hint => "leave it blank if you don't want to change it"
-            = form.input :password_confirmation
-            = form.input :current_password, :hint => "we need your current password to complete your changes", :required => true
-          = form.input :avatar
-          - if @user.avatar_file_name
-            %li.avatar_form_container
-              %label.avatar_label Current Avatar
-              = image_tag @user.avatar.url(:thumb), :class => 'user_avatar'
+    = form.actions do
+      = form.action :submit, :label => "Save", :button_html => {:class => 'btn btn-primary', :disable_with => 'Saving...'}
 
-        = form.actions do
-          = form.action :submit, :label => "Save"
-
-    %p.users_links
-      Unhappy? #{link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete}
-      = link_to "Back", :back
+= link_to "Close Account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-danger'
+= link_to "Back", :back, :class => 'btn'
