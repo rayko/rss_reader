@@ -2,6 +2,7 @@ class User::CommentsController < ApplicationController
   def index
     @comments = Comment.where :article_id => params[:article_id]
     @article = Article.find params[:article_id]
+    @comment = Comment.new :article_id => @article.id
     respond_to do |format|
       format.html { render :partial => 'index' }
     end

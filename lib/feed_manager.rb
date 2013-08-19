@@ -95,8 +95,10 @@ class Feed
     self.items = []
     self.created_at = Time.now
 
-    options[:items].each do |item|
-      self.items << FeedItem.new(item.title, item.url, item.summary, item.published)
+    if options[:items]
+      options[:items].each do |item|
+        self.items << FeedItem.new(item.title, item.url, item.summary, item.published)
+      end
     end
   end
 

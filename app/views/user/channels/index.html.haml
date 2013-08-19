@@ -1,6 +1,6 @@
 %h3.channel_titles Channels List
 
-%table
+%table.table
   %tr
     %th Name
     %th Feed Url
@@ -24,4 +24,4 @@
         %i No channels to display, try adding one.
 
 %p.channel_links
-  = link_to 'Add Channel', new_user_channel_url
+  = link_to 'Add Channel', new_user_channel_url, :class => 'btn'

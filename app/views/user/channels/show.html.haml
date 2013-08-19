@@ -10,6 +10,5 @@
 
 
 %p.channel_links
-  = link_to 'Edit', edit_user_channel_path(@channel)
-  \|
-  = link_to 'Back', user_channels_path
+  = link_to 'Edit', edit_user_channel_path(@channel), :class => 'btn'
+  = link_to 'Back', user_channels_path, :class => 'btn'

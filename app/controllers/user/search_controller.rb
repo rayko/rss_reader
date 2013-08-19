@@ -8,6 +8,7 @@ class User::SearchController < ApplicationController
     else
       @articles.search params[:search][:query]
     end
+    @custom_title = "Results for #{params[:search][:query]}: #{@articles.size} items"
     respond_to do |format|
       format.html { }
     end

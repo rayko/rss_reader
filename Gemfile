@@ -20,6 +20,9 @@ gem 'mysql2',          '0.3.12b4'
 gem 'thinking-sphinx', '~> 3.0.2'
 gem 'activeadmin'
 gem 'whenever', :require => false
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
+gem 'formtastic-bootstrap'
 
 # Gems used only for assets and not required
 # in production environments by default.

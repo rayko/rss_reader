@@ -1,5 +1,14 @@
-- if @channels.any?
-  - @channels.each do |channel|
-    %p= link_to channel.name, '#none', :class => 'channel_link', '_data-path' => user_channel_articles_url(channel.id)
-- else
-  %p No channels, try adding one
+#channel_list{'_data-path' => user_channels_list_url}
+  %ul.nav.nav-list
+    %li.nav-header Sidebar
+    - if @channels
+      - if @channels.any?
+        - @channels.each do |channel|
+          %li
+            %a{:href => '#none', :class => 'channel_link', '_data-path' => user_channel_articles_url(channel.id)}
+              = channel.name
+              %span.badge.badge-success.pull-right= channel.unread_articles_count
+      - else
+        %li No channels, try adding one
+    - else
+      %li Loading...

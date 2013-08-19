@@ -49,6 +49,7 @@ class User::ArticlesController < ApplicationController
   def full_list
     @articles = current_user.all_articles
     @unread_count = @articles.select{ |a| !a.read }.size
+    @custom_title = 'Displaying all articles'
     respond_to do |format|
       format.html { render :partial => 'index', :layout => false}
     end
@@ -57,6 +58,7 @@ class User::ArticlesController < ApplicationController
   def starred
     @articles = current_user.starred_articles
     @unread_count = @articles.select{ |a| !a.read }.size
+    @custom_title = 'Starred articles'
     respond_to do |format|
       format.html { render :partial => 'index', :layout => false}
     end

@@ -12,11 +12,12 @@
  *= require jquery.ui.all
  *= require_tree .
 
+@import "formtastic-bootstrap"
 @import jquery.ui.core
 @import jquery.ui.theme
-@import "formtastic"
-@import "formtastic_ie6"
-@import "formtastic_ie7"
+//@import "formtastic"
+//@import "formtastic_ie6"
+//@import "formtastic_ie7"
 
 =rounded-borders-($position, $r: 5px)
   -webkit-border-#{$position}-right-radius: $r
@@ -37,119 +38,11 @@
 @import "notice"
 @import "user/comments"
 @import "active_admin"
-
-body
-  margin: 0
-  padding: 0
-  width: 100%
-  text-align: center
-  min-width: 800px
-  font-family: arial
-  font-size: 12px
-
-#nav
-  +rounded-borders
-  background-color: #8ad9ef
-  margin-left: auto
-  margin-right: auto
-  width: 95%
-  margin-bottom: 5px
-  height: 2.8em
-  .search_form
-    padding: 5px
-    float: left
-    .query_input
-      width: 145px
-    select
-      width: 145px
-  .nav_link
-    margin: 5px
-    padding: 5px
-    float: right
-    display: block
-
-#main_container
-  clear: both
-  margin-left: auto
-  margin-right: auto
-  width: 95%
-
-#float_warpper
-  position: relative
-  width: 100%
-
-#left_panel
-  float: left
-  width: 25%
-  min-width: 175px
-  text-align: left
-  p
-    margin: 0
-    padding: 0
-
-#special_channels
-  +rounded-borders
-  background-color: #8ad9ef
-  padding: 5px
-  margin-bottom: 5px
-
-#add_channel
-  +rounded-borders
-  background-color: #00ff78
-  margin-bottom: 5px
-  padding: 5px
-  .add_channel_form
-    overflow: hidden
-    display: none
-    #channel_url
-      width: 75%
-
-#channel_list
-  +rounded-borders
-  background-color: #8ad9ef
-  padding: 5px
-
-#article_list
-  +rounded-borders
-  background-color: #81BEF7
-  float: right
-  width: 73%
-  text-align: left
-  padding: 5px
-
-
-#article_options
-  background-color: #81BEF7
-  padding: 5px
-
-.article
-  padding: 10px
-  margin-top: 2px
-  margin-bottom: 0
-  background-color: white
-  &:hover
-    background-color: #f7ff70
-  .separator
-  .date
-    display: block
-  .summary
-    display: inline-block
-    color: #888888
-  .title
-    display: block
-    margin-bottom: 5px
-  .star
-    float: left
-    margin-right: 5px
-
-.no_articles
-  padding: 10px
-  margin-top: 2px
-  margin-bottom: 0
-  background-color: white
-  text-align: center
+@import "bootstrap_and_overrides"
 
 
 .unread
-  span.title
-    font-weight: bold
+  background-color: white
+
+.add_channel_form
+  display: none
