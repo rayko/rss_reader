@@ -3,10 +3,8 @@
     %li
       %a{:href => '#none', '_data-path' => user_articles_full_list_url, :class => 'full_articles_list'}
         All Items
-        %span.badge.pull-right= @articles_count
 
     %li
       %a{:href => '#none', '_data-path' => user_articles_starred_url, :class => 'starred_articles'}
         Starred Items
-        %span.badge.pull-right= @starred_articles_count
     %li= link_to 'Manage Channels', user_channels_url

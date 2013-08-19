@@ -1,7 +1,8 @@
 #add_channel
-  %p= link_to 'Add Channel', '#none', :class => 'channel_form_toggle'
+  = link_to 'Add Channel', '#none', :class => 'channel_form_toggle'
   %div.add_channel_form
     = form_for :channel, :url => user_channels_url, :remote => true, :html => {:id => 'fast_channel_add_form', 'data-type' => 'json'} do |f|
-      = f.text_field :url
-      = f.submit 'Add'
-  %div.channel_error
+      .input-append
+        = f.text_field :url
+        = f.submit 'Add', :class => 'btn'
+      %div.channel_error
