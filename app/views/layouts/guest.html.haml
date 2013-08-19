@@ -21,11 +21,11 @@
   %body
 
     .container
-      .span5.offset3
+      .span5.offset3.custom-top-margin
         = bootstrap_flash
         #dynamic_content
           .well
             = yield
 
         %footer.clearfix.text-center
-          %p &copy; Company 2013
+          = render :partial => 'application/footer'
