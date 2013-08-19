@@ -24,11 +24,11 @@ class FeedManager
       if cached_feed
         return cached_feed
       else
-        data = Feedzirra::Feed.fetch_and_parse url
+        data = Feedzirra::Feed.fetch_and_parse url unless url.blank?
         # Feed validation
         # Feedzirra does the fetching and parsing with its own parsers,
         # if Feedzirra returns nil after a fetch, the feed is not valid.
-        unless data.nil? && data.class != Fixnum
+        unless data.nil?
           feed = Feed.new :title => data.title,
                           :items => data.entries,
                           :url => data.url,
