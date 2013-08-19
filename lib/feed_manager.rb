@@ -28,7 +28,7 @@ class FeedManager
         # Feed validation
         # Feedzirra does the fetching and parsing with its own parsers,
         # if Feedzirra returns nil after a fetch, the feed is not valid.
-        unless data.nil?
+        unless data.nil? && data.class != Fixnum
           feed = Feed.new :title => data.title,
                           :items => data.entries,
                           :url => data.url,
