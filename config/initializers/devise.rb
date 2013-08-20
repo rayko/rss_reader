@@ -237,7 +237,7 @@ Devise.setup do |config|
   # Dev site https://code.google.com/apis/console
   google_key = '356605707238.apps.googleusercontent.com'
   google_secret = 'BHuC0rSICV9ZVWifLWSHEUeC'
-  config.omniauth :google_oauth2, google_key, google_secret, { access_type: "offline", approval_prompt: "" }, :client_options => { :ssl => {:ca_path => "/etc/ssl/certs"}}
+  config.omniauth :google_oauth2, google_key, google_secret, { access_type: "offline", approval_prompt: "" }
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
