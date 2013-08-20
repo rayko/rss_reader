@@ -2,7 +2,9 @@ class Article < ActiveRecord::Base
   attr_accessible :comment, :description, :link, :pub_date, :starred, :title, :channel_id
 
   belongs_to :channel
-  has_many :comments
+  has_many :comments, :foreign_key => :article_hash_tag, :primary_key => :hash_tag
+
+  before_create :generate_hash_tag
 
   def self.create_from_feed_items items, channel_id
     items.each do |item|
@@ -32,6 +34,15 @@ class Article < ActiveRecord::Base
 
   def belongs_to_user(user)
     self.channel.user_id == user.id
+  end
+
+  private
+  # Generates an MD5 hash from article link
+  # to identify multiples articles from it.
+  # Used to share comments in different articles
+  # that are basically the same.
+  def generate_hash_tag
+    self.hash_tag = Digest::MD5.hexdigest(self.link)
   end
 
 end

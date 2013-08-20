@@ -105,8 +105,6 @@ function load_articles(path, data){
 
 };
 
-
-
 function setup_article_links(){
     $('.article').click(article_click_events);
     $('.refresh_channel_articles').click(function(){

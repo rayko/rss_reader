@@ -4,9 +4,9 @@ class User::ArticlesController < ApplicationController
 
   def index
     if params[:fetch] == 'all'
-      @articles = Article.where(:channel_id => params[:channel_id]).order(:created_at).page params[:page]
+      @articles = Article.where(:channel_id => params[:channel_id]).order('created_at ASC').page params[:page]
     else
-      @articles = Article.where(:channel_id => params[:channel_id], :read => false).order(:created_at).page params[:page]
+      @articles = Article.where(:channel_id => params[:channel_id], :read => false).order('created_at ASC').page params[:page]
     end
     @channel = Channel.find params[:channel_id]
     @unread_count = @articles.select{ |a| !a.read }.size
@@ -48,7 +48,7 @@ class User::ArticlesController < ApplicationController
   end
 
   def full_list
-    @articles = current_user.all_articles.order(:created_at).page params[:page]
+    @articles = current_user.all_articles.order('created_at ASC').page params[:page]
     @unread_count = @articles.select{ |a| !a.read }.size
     @custom_title = 'Displaying all articles'
     @enable_pagination = true
@@ -58,7 +58,7 @@ class User::ArticlesController < ApplicationController
   end
 
   def starred
-    @articles = current_user.starred_articles.order(:created_at).page params[:page]
+    @articles = current_user.starred_articles.order('created_at ASC').page params[:page]
     @unread_count = @articles.select{ |a| !a.read }.size
     @custom_title = 'Starred articles'
     @enable_pagination = true

@@ -17,18 +17,23 @@ class FeedManager
   # Tries to get a feed from either Feedzirra or local cache
   # If there is no cached feed, it creates one and returns it
   def get_feed(url)
+    logger.info 'FeedManager: Starting feed request process'
     if Rails.env  == 'test'
+      logger.info 'FeedManager: env is test, fetching test data'
       Feedzirra::Feed.parse File.open(Rails.root.join('test', 'mspaintadventures_test_feed.xml'), 'r').read
     else
       cached_feed = get_feed_from_cache(url)
       if cached_feed
+        logger.info 'FeedManager: Feed found in cache, returning it'
         return cached_feed
       else
+        logger.info "FeedManager: No feed found in cache, requesting to #{url}"
         data = Feedzirra::Feed.fetch_and_parse url unless url.blank?
         # Feed validation
         # Feedzirra does the fetching and parsing with its own parsers,
         # if Feedzirra returns nil after a fetch, the feed is not valid.
         unless data.nil? || data.class == Fixnum
+          logger.info 'FeedManager: Feed fetched and valid'
           feed = Feed.new :title => data.title,
                           :items => data.entries,
                           :url => data.url,
@@ -37,6 +42,7 @@ class FeedManager
           store_feed(feed)
           return feed
         else
+          logger.info "FeedManager: Invalid feed returned from #{url} returning dummy invalid feed"
           feed = Feed.new :valid => false
           return feed
         end
@@ -45,8 +51,7 @@ class FeedManager
   end
 
 
-  # Gets a feed from either Feedzirra or cache and then updates it.
-  # Returns the new articles fetched
+  # Gets a feed from either Feedzirra or cache and returns the entries.
   def update_feed(url)
     feed = get_feed(url)
     if feed.valid?
@@ -63,12 +68,15 @@ class FeedManager
     end
   end
 
+
   private
   # Saves a feed in cache, returns a Feed object
   def store_feed(feed)
     if @@feed_list.keys.include? feed.feed_url
+      logger.info "FeedManager: Updating feed from #{feed.feed_url} in cache"
       @@feed_list[feed.feed_url] = feed if @@feed_list[feed.feed_url].expired?
     else
+      logger.info "FeedManager: Storing new feed from #{feed.feed_url} in cache"
       @@feed_list[feed.feed_url] = feed
     end
   end
@@ -76,10 +84,16 @@ class FeedManager
   # Retrives a feed from cache, returns a Feed object
   def get_feed_from_cache(url)
     if @@feed_list[url] && !@@feed_list[url].expired?
+      logger.info "FeedManager: Found feed #{url} in cache and is not expired"
       return @@feed_list[url]
     else
+      logger.info "FeedManager: No feed found in cache for #{url}"
       return nil
     end
+  end
+
+  def logger
+    Rails.logger
   end
 end
 

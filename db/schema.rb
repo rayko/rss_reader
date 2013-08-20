@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130816092008) do
+ActiveRecord::Schema.define(:version => 20130820025120) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20130816092008) do
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
     t.boolean  "read",        :default => false
+    t.string   "hash_tag"
   end
 
   create_table "channels", :force => true do |t|
@@ -69,10 +70,10 @@ ActiveRecord::Schema.define(:version => 20130816092008) do
 
   create_table "comments", :force => true do |t|
     t.text     "text"
-    t.integer  "article_id"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "article_hash_tag"
   end
 
   create_table "profile_types", :force => true do |t|
