@@ -1,8 +1,5 @@
 RssReader::Application.routes.draw do
-  root :to => 'application#index'
-
   devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
 
   devise_for :users, :controllers => {:omniauth_callbacks => 'users/omniauth_callbacks', :registrations => 'users/registrations' }
 
@@ -26,7 +23,7 @@ RssReader::Application.routes.draw do
   end
 
 
-
-
+  root :to => 'application#index'
+  ActiveAdmin.routes(self)
   match '*not_found', to: 'application#error_404' unless Rails.application.config.consider_all_requests_local
 end
