@@ -27,7 +27,7 @@ public/system/*
 
 # Ignore Sphinx created indexes and configs
 db/sphinx/*
-*.sphinx
+*.sphinx.*
 
 # Ignore compiled Assests
 public/assets/*
