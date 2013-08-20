@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   # Relations
   has_many :channels, :dependent => :destroy
   belongs_to :profile_type
-  has_many :comments
+  has_many :comments, :dependent => :destroy
 
   # Paperclip
     has_attached_file :avatar, :styles => { :large => "400x400", :medium => "200x200>", :thumb => "100x100>" }
