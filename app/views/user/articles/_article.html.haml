@@ -8,7 +8,8 @@
     %h4= link_to article.title, article.link
   %span.summary
     = raw article.description
-  %span.date
+  %hr
+  %span.date.clearfix
     Published
     - if article.pub_date
       = distance_of_time_in_words_to_now article.pub_date
