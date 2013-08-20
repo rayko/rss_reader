@@ -25,5 +25,9 @@ public/system/*
 # Ignore pids
 *.pid
 
-# Ignore Sphinx created indexes
+# Ignore Sphinx created indexes and configs
 db/sphinx/*
+*.sphinx
+
+# Ignore compiled Assests
+public/assets/*
