@@ -17,7 +17,11 @@ ActiveAdmin.register_page "Dashboard" do
         panel "Recent Users" do
           ul do
             User.limit(5).order('created_at DESC').map do |user|
-              li link_to(user.email, admin_user_path(user))
+              if user.email.blank?
+                li link_to(user.username, admin_user_path(user))
+              else
+                li link_to(user.email, admin_user_path(user))
+              end
             end
           end
         end
