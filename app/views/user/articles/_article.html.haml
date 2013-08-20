@@ -10,10 +10,13 @@
     = raw article.description
   %span.date
     Published
-    = distance_of_time_in_words_to_now article.pub_date
+    - if article.pub_date
+      = distance_of_time_in_words_to_now article.pub_date
+    - else
+      = distance_of_time_in_words_to_now article.created_at
     ago
   %div.comment_section
     %a{:class => 'toggle_comments', '_data-path' => user_article_comments_url(article.id), :href => '#none'}
       %span.ui-icon.ui-icon-triangle-1-e{:style => 'float: left'}
-      Comments
+      = "Comments (#{article.comments.size})"
     %div.article_comments

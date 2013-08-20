@@ -1,13 +1,13 @@
 namespace :rss do
   desc "Updates channel feeds"
   task :update_feeds => :environment do
-    puts '-.Feed update starting.-'
+    Rails.logger.info 'rss:update_feed Feed update starting'
     Channel.all.each do |channel|
-      puts "Beginning feed request at #{channel.url}..."
+      Rails.logger.info "rss:update_feed Beginning feed request at #{channel.url}..."
       channel.update_feed
-      puts "Request done. #{channel.url} updated!"
+      Rails.logger.info "rss:update_feed Request done. #{channel.url} updated!"
     end
-    puts '-.Feed update finished.-'
+    Rails.logger.info 'rss:update_feed Feed update finished!'
   end
 
   desc "Generates daily mails and send them to users"

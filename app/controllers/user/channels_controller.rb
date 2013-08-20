@@ -25,6 +25,8 @@ class User::ChannelsController < ApplicationController
   # GET /channels/1.json
   def show
     @channel = Channel.find(params[:id])
+    if @channel.user_id == current_user.id
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -36,18 +38,22 @@ class User::ChannelsController < ApplicationController
   # GET /channels/new.json
   def new
     @channel = Channel.new
-
     @channel_path = user_channels_path
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @channel }
-    end
   end
 
   # GET /channels/1/edit
   def edit
     @channel = Channel.find(params[:id])
     @channel_path = user_channel_path(@channel)
+    respond_to do |format|
+      if @channel.user_id == current_user.id
+        format.html # edit.html.erb
+        format.json { render json: @channel }
+      else
+        format.html { redirect_to user_channels_path, :notice => 'Channel not found.' }
+        format.json { render :json => :error }
+      end
+    end
   end
 
   # POST /channels
@@ -58,7 +64,7 @@ class User::ChannelsController < ApplicationController
     respond_to do |format|
       if @channel.save
         format.html { redirect_to user_channels_path, notice: 'Channel created.' }
-        format.json { render json: @channel, status: :created, location: @channel }
+        format.json { render json: @channel, status: :created }
       else
         if @channel.errors.messages[:base]
           flash[:alert] = @channel.errors.messages[:base].first
