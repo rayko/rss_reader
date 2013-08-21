@@ -20,4 +20,10 @@ module NavHelpers
     visit user_channels_path
   end
 
+  def wait_ajax_calls
+    until page.evaluate_script('$.active') == 0
+      'lol wating ajax'
+    end
+  end
+
 end

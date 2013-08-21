@@ -9,11 +9,14 @@ Feature: Article Browsing
                 And I am on the index page
 
 
+
+         @wip
          @javascript
          Scenario: Retrive Articles List
                    When I click "MS Paint Adventures" link
                    Then page should have many unread articles
 
+         @wip
          @javascript
          Scenario: Mark all atricles as read
                    Given I click "MS Paint Adventures" link
