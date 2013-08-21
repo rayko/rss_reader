@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "channels/new" do
+describe "user/channels/new" do
   before(:each) do
     assign(:channel, stub_model(Channel,
       :title => "MyString",
@@ -12,8 +12,7 @@ describe "channels/new" do
     render
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
-    assert_select "form[action=?][method=?]", channels_path, "post" do
-      assert_select "input#channel_title[name=?]", "channel[title]"
+    assert_select "form[action=?][method=?]", user_channels_url, "post" do
       assert_select "input#channel_url[name=?]", "channel[url]"
     end
   end

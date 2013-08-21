@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "channels/show" do
+describe "user/channels/show" do
   before(:each) do
     @channel = assign(:channel, stub_model(Channel,
       :title => "Title",
