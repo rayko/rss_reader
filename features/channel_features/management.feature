@@ -38,3 +38,13 @@ Feature: Channel Administration
                    And I am on manage channels section
                    When I click "Show" link
                    Then page should have my channel information
+
+         @javascript
+         Scenario: Channel add with ajax form
+                   Given I am a user of the site
+                   And I have no channels
+                   And I am on the index page
+                   And I click "Add Channel" link
+                   And I fill in "Channel Url" with "http://mspaintadventures.com/rss/rss.xml"
+                   When I click "Add" button
+                   Then I should see a "MS Paint Adventures" link
