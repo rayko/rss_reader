@@ -24,3 +24,13 @@ When(/^I click Add button from channel manager$/) do
     click_button 'Add'
   end
 end
+
+Given(/^I have "(.*?)" channel$/) do |count|
+  count.to_i.times do
+    FactoryGirl.create :channel, :user_id => retrive_test_account.id
+  end
+end
+
+Given(/^I am on manage channels section$/) do
+  goto_channel_index
+end

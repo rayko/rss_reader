@@ -12,7 +12,7 @@ Feature: User Registration
                 And I fill in "User Email" with "lolcat@example.com"
                 And I fill in "User Password" with "123456789"
                 And I fill in "User Password Confirmation" with "123456789"
-                When I press "Submit"
+                When I click "Submit" button
                 Then page should have notice message "A message with a confirmation link has been sent"
 
         Scenario: Confirmation
