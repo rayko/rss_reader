@@ -21,3 +21,7 @@ end
 Given(/^I am on the index page$/) do
   goto_home_section
 end
+
+When(/^I confirm dialog$/) do
+  page.driver.browser.switch_to.alert.accept
+end

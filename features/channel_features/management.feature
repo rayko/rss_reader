@@ -12,7 +12,7 @@ Feature: Channel Administration
                    Then page should have notice message "Channel created"
                    And page should have "MS Paint Adventures"
 
-         @wip
+
          Scenario: Channel Title edit
                    Given I am a user of the site
                    And I have "1" channel
@@ -22,3 +22,13 @@ Feature: Channel Administration
                    When I click "Save" button
                    Then page should have notice message "Channel was successfully updated"
                    And page should have "My Channel"
+
+         @wip
+         @javascript
+         Scenario: Channel Deletion
+                   Given I am a user of the site
+                   And I have "1" channel
+                   And I am on manage channels section
+                   And I click "Destroy" link
+                   When I confirm dialog
+                   Then page should have "No channels"
