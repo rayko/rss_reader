@@ -9,7 +9,7 @@ class User::ArticlesController < ApplicationController
       @articles = Article.where(:channel_id => params[:channel_id], :read => false).order('created_at ASC').page params[:page]
     end
     @channel = Channel.find params[:channel_id]
-    @unread_count = @articles.select{ |a| !a.read }.size
+    @unread_count = @channel.unread_articles_count
     @enable_pagination = true
     respond_to do |format|
       format.html { render :partial => 'index', :layout => false}
