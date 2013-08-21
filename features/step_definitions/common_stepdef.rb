@@ -25,3 +25,9 @@ end
 When(/^I confirm dialog$/) do
   page.driver.browser.switch_to.alert.accept
 end
+
+When(/^wait page to load properly$/) do
+  wait_until do
+    page.evaluate_script('$.active') == 0
+  end
+end

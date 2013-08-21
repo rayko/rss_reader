@@ -74,7 +74,7 @@ class FeedManager
     logger.info 'FeedManager: env is test, fetching test data'
     data = Feedzirra::Feed.parse File.open(Rails.root.join('test', 'mspaintadventures_test_feed.xml'), 'r').read
     return Feed.new :title => data.title,
-                    :item => data.entries,
+                    :items => data.entries,
                     :url => data.url,
                     :feed_url => data.feed_url,
                     :valid => true
