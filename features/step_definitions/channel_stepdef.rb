@@ -40,3 +40,7 @@ Then(/^page should have my channel information$/) do
   page.should have_content @channel.name
   page.should have_content @channel.url
 end
+
+Given(/^I have no channels$/) do
+  page.should have_content "No channels"
+end
