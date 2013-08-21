@@ -1,13 +1,6 @@
 module UserHelpers
   def create_test_account
-    user = User.create! :first_name => 'Lolcat',
-    :last_name => 'McAlliester',
-    :username => 'lolcat',
-    :email => 'lolcat@example.com',
-    :password => '123456789',
-    :password_confirmation => '123456789'
-
-    return user
+    return FactoryGirl.create :test_user
   end
 
   def confirm_test_account
@@ -19,7 +12,7 @@ module UserHelpers
     confirm_test_account
   end
 
-  def retrive_test_account
+  def retrive_test_account username='lolcat'
     User.find_by_username('lolcat')
   end
 
@@ -37,6 +30,6 @@ module UserHelpers
     visit new_user_session_path
     fill_in('user_login', :with => authentication_name)
     fill_in('user_password', :with => '123456789')
-    click_button 'Sign in'
+    click_button 'Sign In'
   end
 end

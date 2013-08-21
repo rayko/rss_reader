@@ -9,7 +9,7 @@ Feature: User Authentication
                   And I click "Login" link
                   And I fill in "User Login" with my email
                   And I fill in "User Password" with my password
-                  When I click "Sign in" button
+                  When I click "Sign In" button
                   Then page should have notice message "Signed in successfully"
                   And I should see a "Logout" link
                   And I should see a "Edit Profile" link
@@ -20,7 +20,7 @@ Feature: User Authentication
                   And I click "Login" link
                   And I fill in "User Login" with my login name
                   And I fill in "User Password" with my password
-                  When I click "Sign in" button
+                  When I click "Sign In" button
                   Then page should have notice message "Signed in successfully"
                   And I should see a "Logout" link
                   And I should see a "Edit Profile" link
