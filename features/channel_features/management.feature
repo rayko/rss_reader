@@ -23,7 +23,6 @@ Feature: Channel Administration
                    Then page should have notice message "Channel was successfully updated"
                    And page should have "My Channel"
 
-         @wip
          @javascript
          Scenario: Channel Deletion
                    Given I am a user of the site
@@ -32,3 +31,11 @@ Feature: Channel Administration
                    And I click "Destroy" link
                    When I confirm dialog
                    Then page should have "No channels"
+
+         @wip
+         Scenario: Channel Show
+                   Given I am a user of the site
+                   And I have "1" channel
+                   And I am on manage channels section
+                   When I click "Show" link
+                   Then page should have my channel information
