@@ -34,3 +34,9 @@ end
 Given(/^I am on manage channels section$/) do
   goto_channel_index
 end
+
+Then(/^page should have my channel information$/) do
+  @channel = retrive_test_account.channels.first
+  page.should have_content @channel.name
+  page.should have_content @channel.url
+end
