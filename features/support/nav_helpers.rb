@@ -12,6 +12,12 @@ module NavHelpers
   def home_link
   end
 
-  def root_path
+  def goto_home_section
+    visit root_path
   end
+
+  def goto_channel_index
+    visit user_channels_path
+  end
+
 end

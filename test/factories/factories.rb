@@ -27,4 +27,13 @@ FactoryGirl.define do
     profile_type.name 'Basic'
     profile_type.channel_limit 10
   end
+
+  factory :channel do
+    sequence :name do |n|
+      "Channe_#{n}"
+    end
+    sequence :url do |n|
+      "htt://mspaintadventures.com/rss/rss.xml.#{n}"
+    end
+  end
 end

@@ -64,4 +64,6 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 
 # Helpers
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "user_helpers"))
+require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "nav_helpers"))
 World(UserHelpers)
+World(NavHelpers)

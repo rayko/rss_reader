@@ -18,7 +18,7 @@ Feature: User Profile Administration
                    And I fill in "User First Name" with "David"
                    And I fill in "User Last Name" with "Peterson"
                    And I fill in "User Current Password" with "123456789"
-                   When I press "Save"
+                   When I click "Save" button
                    Then page should have notice message "You updated your account successfully"
                    And I should see "David" as "First Name" on my profile
                    And I should see "Peterson" as "Last Name" on my profile

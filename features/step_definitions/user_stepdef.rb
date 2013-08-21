@@ -1,21 +1,5 @@
-Given(/^I am on the index page$/) do
-  visit root_path
-end
-
 Given(/^I click the signup link$/) do
   click_link "Sign Up"
-end
-
-Given(/^I fill in "(.*?)" with "(.*?)"$/) do |field, value|
-  fill_in(field.downcase.split(' ').join('_'), :with => value)
-end
-
-When(/^I press "(.*?)"$/) do |button|
-  click_button(button)
-end
-
-Then(/^page should have notice message "(.*?)"$/) do |message|
-  page.should have_content(message)
 end
 
 Given(/^I created an account$/) do
@@ -31,10 +15,6 @@ Given(/^I created and confirmed my account$/) do
   create_and_confirm_test_account
 end
 
-Given(/^I click "(.*?)" link$/) do |name|
-  click_link name
-end
-
 Given(/^I fill in "(.*?)" with my email$/) do |field|
   user = User.find_by_username('lolcat')
   fill_in(field.downcase.split(' ').join('_'), :with => user.email)
@@ -43,14 +23,6 @@ end
 Given(/^I fill in "(.*?)" with my password$/) do |field|
   user = User.find_by_username('lolcat')
   fill_in(field.downcase.split(' ').join('_'), :with => '123456789')
-end
-
-When(/^I click "(.*?)" button$/) do |name|
-  click_button name
-end
-
-Then(/^I should see a "(.*?)" link$/) do |link|
-  page.should have_content link
 end
 
 Given(/^I fill in "(.*?)" with my login name$/) do |field|
