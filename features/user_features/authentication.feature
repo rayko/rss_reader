@@ -6,7 +6,6 @@ Feature: User Authentication
         Scenario: Login with email
                   Given I created and confirmed my account
                   And I am on the index page
-                  And I click "Login" link
                   And I fill in "User Login" with my email
                   And I fill in "User Password" with my password
                   When I click "Sign In" button
@@ -17,7 +16,6 @@ Feature: User Authentication
         Scenario: Login with username
                   Given I created and confirmed my account
                   And I am on the index page
-                  And I click "Login" link
                   And I fill in "User Login" with my login name
                   And I fill in "User Password" with my password
                   When I click "Sign In" button

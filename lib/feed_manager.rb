@@ -19,8 +19,7 @@ class FeedManager
   def get_feed(url)
     logger.info 'FeedManager: Starting feed request process'
     if Rails.env  == 'test'
-      logger.info 'FeedManager: env is test, fetching test data'
-      Feedzirra::Feed.parse File.open(Rails.root.join('test', 'mspaintadventures_test_feed.xml'), 'r').read
+      fetch_test_feed
     else
       cached_feed = get_feed_from_cache(url)
       if cached_feed
@@ -70,6 +69,17 @@ class FeedManager
 
 
   private
+  # Only for tests purposes
+  def fetch_test_feed
+    logger.info 'FeedManager: env is test, fetching test data'
+    data = Feedzirra::Feed.parse File.open(Rails.root.join('test', 'mspaintadventures_test_feed.xml'), 'r').read
+    return Feed.new :title => data.title,
+                    :item => data.entries,
+                    :url => data.url,
+                    :feed_url => data.feed_url,
+                    :valid => true
+  end
+
   # Saves a feed in cache, returns a Feed object
   def store_feed(feed)
     if @@feed_list.keys.include? feed.feed_url
