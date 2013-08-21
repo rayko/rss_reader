@@ -32,7 +32,6 @@ Feature: Channel Administration
                    When I confirm dialog
                    Then page should have "No channels"
 
-         @wip
          Scenario: Channel Show
                    Given I am a user of the site
                    And I have "1" channel
