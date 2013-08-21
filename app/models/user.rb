@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
 
   # Paperclip
-    has_attached_file :avatar, :styles => { :large => "400x400", :medium => "200x200>", :thumb => "100x100>" }
+  has_attached_file :avatar, :styles => { :large => "400x400", :medium => "200x200>", :thumb => "100x100>" }
 
   # Validations
   validates :first_name, :last_name, :username, :presence => true, :length => { :maximum => 50 }

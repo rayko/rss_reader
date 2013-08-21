@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
       @starred_articles_count = current_user.starred_articles_count
       @custom_title = 'Pick a channel'
     else
-      redirect_to new_user_session_url, :layout => 'guest'
+      render layout: 'guest'
     end
 
   end

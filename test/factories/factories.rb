@@ -6,6 +6,7 @@ FactoryGirl.define do
     user.email 'lolcat@example.com'
     user.password '123456789'
     user.password_confirmation '123456789'
+    association :profile_type, :factory => :profile_type, :name => 'Basic', :channel_limit => 10
   end
 
 
@@ -20,5 +21,10 @@ FactoryGirl.define do
     end
     user.password '123456789'
     user.password_confirmation '123456789'
+  end
+
+  factory :profile_type do |profile_type|
+    profile_type.name 'Basic'
+    profile_type.channel_limit 10
   end
 end
