@@ -4,6 +4,7 @@ describe User do
 
   context 'with no content' do
     before do
+      ProfileType.delete_all
       @profile_type = create(:profile_type)
       @valid_user = build(:valid_user)
       @invalid_user = build(:invalid_user)
