@@ -50,7 +50,7 @@ FactoryGirl.define do
       "Channe_#{n}"
     end
     sequence :url do |n|
-      "htt://mspaintadventures.com/rss/rss.xml.#{n}"
+      "http://mspaintadventures.com/rss/rss_#{n}.xml}"
     end
   end
 

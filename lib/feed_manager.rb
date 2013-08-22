@@ -30,6 +30,9 @@ class FeedManager
   # test flag considers url as either filename to parse a test
   # feed or a valid url to request real data
   def get_feed(url, test=false)
+    if Rails.env == 'test' && !test
+      test = true
+    end
     logger.info 'FeedManager: Starting feed request process'
     cached_feed = get_feed_from_cache(url)
     if cached_feed
