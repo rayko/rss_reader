@@ -67,6 +67,17 @@ class FeedManager
     end
   end
 
+  def create_test_feed_object
+    items = []
+    4.times do
+      items << FeedItem.new('Some Article From Feed', 'Some content', 'http://link-to-article-in-feed.com', Time.now)
+    end
+    return Feed.new :title => 'Some Feed',
+    :items => items,
+    :url => 'http://somesite.com',
+    :feed_url => 'http://somefeed.com',
+    :valid => true
+  end
 
   private
   # Only for tests purposes
@@ -136,12 +147,16 @@ class Feed
 end
 
 class FeedItem
-  attr_accessor :title, :url, :description, :pub_date
+  attr_accessor :title, :url, :summary, :pub_date
 
-  def initialize(title, url, description, pub_date)
+  def initialize(title, url, summary, pub_date)
     self.title = title
     self.url = url
-    self.description = description
+    self.summary = summary
     self.pub_date = pub_date || DateTime.now
+  end
+
+  def published
+    self.pub_date
   end
 end

@@ -1,5 +1,5 @@
 class Article < ActiveRecord::Base
-  attr_accessible :comment, :description, :link, :pub_date, :starred, :title, :channel_id
+  attr_accessible :description, :link, :pub_date, :starred, :title, :channel_id
 
   belongs_to :channel
   has_many :comments, :foreign_key => :article_hash_tag, :primary_key => :hash_tag
@@ -8,15 +8,27 @@ class Article < ActiveRecord::Base
 
   def self.create_from_feed_items items, channel_id
     items.each do |item|
-      self.create :link => item.url, :pub_date => item.pub_date, :description => item.description, :title => item.title, :channel_id => channel_id
+      self.create :link => item.url, :pub_date => item.pub_date, :description => item.summary, :title => item.title, :channel_id => channel_id
     end
   end
 
   def self.add_from_feed_items items, channel_id
-    last_article = self.last
+    last_article = self.newest_article channel_id
     items.each do |item|
-      self.create :link => item.url, :pub_date => item.pub_date, :description => item.description, :title => item.title, :channel_id => channel_id if item.pub_date > last_article.pub_date
+      new_article = self.new :link => item.url, :pub_date => item.pub_date, :description => item.summary, :title => item.title, :channel_id => channel_id
+      if last_article && item.pub_date
+        if item.pub_date > last_article.created_at
+          new_article.save
+        end
+      else
+        new_article.save
+      end
     end
+  end
+
+  def self.newest_article channel_id
+    channel = Channel.find channel_id
+    channel.articles.order('created_at DESC').first
   end
 
   def mark_as_read
