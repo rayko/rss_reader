@@ -59,16 +59,13 @@ class User::ChannelsController < ApplicationController
   # POST /channels
   # POST /channels.json
   def create
-    @channel = Channel.new(params[:channel])
-    @channel.user_id = current_user.id
+    @channel = (Channel.new(params[:channel]).user_id = current_user.id)
     respond_to do |format|
       if @channel.save
         format.html { redirect_to user_channels_path, notice: 'Channel created.' }
         format.json { render json: @channel, status: :created }
       else
-        if @channel.errors.messages[:base]
-          flash[:alert] = @channel.errors.messages[:base].first
-        end
+        check_if_limit_error
         format.html { render action: "new" }
         format.json { render json: @channel.errors, status: :unprocessable_entity }
       end
@@ -83,11 +80,8 @@ class User::ChannelsController < ApplicationController
     respond_to do |format|
       if @channel.update_attributes(params[:channel])
         format.html { redirect_to user_channels_url, notice: 'Channel was successfully updated.' }
-        format.json { head :no_content }
       else
-        @channel_path = user_channel_path(@channel)
         format.html { render action: "edit" }
-        format.json { render json: @channel.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -101,6 +95,13 @@ class User::ChannelsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to user_channels_url }
       format.json { head :no_content }
+    end
+  end
+
+  private
+  def check_if_limit_error
+    if @channel.errors.messages[:base]
+      flash[:alert] = @channel.errors.messages[:base].first
     end
   end
 end
