@@ -56,6 +56,15 @@ class Article < ActiveRecord::Base
     end
   end
 
+  def self.perform_search options
+    unless options[:channel_id].blank?
+      Article.search options[:query], :with => { :channel_id => options[:channel_id].to_i }, :page => options[:page]
+    else
+      Article.search options[:query], :page => options[:page]
+    end
+
+  end
+
   private
   # Generates an MD5 hash from article link
   # to identify multiples articles from it.
