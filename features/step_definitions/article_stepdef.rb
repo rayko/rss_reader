@@ -44,3 +44,11 @@ end
 When(/^I click All items link within special channels$/) do
   find('.full_articles_list').click
 end
+
+Given(/^I have "(.*?)" channel with name "(.*?)"$/) do |count, name|
+  Channel.delete_all
+  count.to_i.times do
+    retrive_test_account.channels << FactoryGirl.create(:channel, :name => name, :user_id => retrive_test_account.id)
+  end
+
+end

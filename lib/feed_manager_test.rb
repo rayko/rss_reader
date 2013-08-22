@@ -29,7 +29,7 @@ module FeedManagerTest
   end
 
   def get_file filename
-    if File.exists?(Rails.root.join('test', 'test_feeds', filename))
+    if filename && File.exists?(Rails.root.join('test', 'test_feeds', filename))
       # Return file if exists
       return File.open(Rails.root.join('test', 'test_feeds', filename)).read
     else
