@@ -21,3 +21,7 @@
 every 5.minutes do
   rake "rss:update_feeds"
 end
+
+every 2.hours do
+  rake "ts:reabuild"
+end
