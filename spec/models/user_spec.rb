@@ -66,11 +66,11 @@ describe User do
     end
 
     it 'authenticates with google'do
-      pending
+      pending 'Read devise docs to do the proper mocks'
     end
 
     it 'authenticates with twitter' do
-      pending
+      pending "Read devise docs to do the proper mocks"
     end
 
     it 'creates with session' do
