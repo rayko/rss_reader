@@ -1,7 +1,3 @@
-Then(/^page should have "(.*?)"$/) do |text|
-  page.should have_content text
-end
-
 Given(/^I click "(.*?)" link from channel manager$/) do |link_name|
   within("#dynamic_content") do
     click_link link_name
