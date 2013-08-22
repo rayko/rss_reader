@@ -41,4 +41,18 @@ RssReader::Application.configure do
   # For Mailcatcher
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = { :address => 'localhost', :port => 1025 }
+
+  # Makes posible to test omniauth locally
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({:provider => 'twitter',
+                                                                 :uid => '123545',
+                                                                 :info => {:nickname => "rayko",
+                                                                   :name => "Rayko Diarghi"}})
+  OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({:provider => 'google_oauth2',
+                                                                       :uid => '123545',
+                                                                       :info => {:first_name => "Rayko",
+                                                                         :last_name => "Diarghi",
+                                                                         :email => 'rayko@example.com',
+                                                                         :name => 'Rayko Diarghi'}})
+
 end
