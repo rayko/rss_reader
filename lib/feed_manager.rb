@@ -26,25 +26,7 @@ class FeedManager
         logger.info 'FeedManager: Feed found in cache, returning it'
         return cached_feed
       else
-        logger.info "FeedManager: No feed found in cache, requesting to #{url}"
-        data = Feedzirra::Feed.fetch_and_parse url unless url.blank?
-        # Feed validation
-        # Feedzirra does the fetching and parsing with its own parsers,
-        # if Feedzirra returns nil after a fetch, the feed is not valid.
-        unless data.nil? || data.class == Fixnum
-          logger.info 'FeedManager: Feed fetched and valid'
-          feed = Feed.new :title => data.title,
-                          :items => data.entries,
-                          :url => data.url,
-                          :feed_url => data.feed_url,
-                          :valid => true
-          store_feed(feed)
-          return feed
-        else
-          logger.info "FeedManager: Invalid feed returned from #{url} returning dummy invalid feed"
-          feed = Feed.new :valid => false
-          return feed
-        end
+        return request_feed
       end
     end
   end
@@ -80,6 +62,29 @@ class FeedManager
   end
 
   private
+  def request_feed
+    logger.info "FeedManager: No feed found in cache, requesting to #{url}"
+    data = Feedzirra::Feed.fetch_and_parse url unless url.blank?
+    # Feed validation
+    # Feedzirra does the fetching and parsing with its own parsers,
+    # if Feedzirra returns nil after a fetch, the feed is not valid.
+    unless data.nil? || data.class == Fixnum
+      logger.info 'FeedManager: Feed fetched and valid'
+      feed = Feed.new :title => data.title,
+                      :items => data.entries,
+                      :url => data.url,
+                      :feed_url => data.feed_url,
+                      :valid => true
+      store_feed(feed)
+      return feed
+    else
+      logger.info "FeedManager: Invalid feed returned from #{url} returning dummy invalid feed"
+      feed = Feed.new
+      return feed
+    end
+
+  end
+
   # Only for tests purposes
   def fetch_test_feed
     logger.info 'FeedManager: env is test, fetching test data'
@@ -126,7 +131,7 @@ class Feed
     options[:title].blank? ? self.title = 'Untitled' : self.title = options[:title]
     self.url = options[:url]
     self.feed_url = options[:feed_url]
-    self.valid = options[:valid]
+    self.valid = options[:valid] || false
     self.items = []
     self.created_at = Time.now
 
