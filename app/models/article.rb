@@ -48,6 +48,14 @@ class Article < ActiveRecord::Base
     self.channel.user_id == user.id
   end
 
+  def self.get_articles options
+    if options[:fetch] == 'all'
+      self.where(:channel_id => options[:channel_id]).order('created_at ASC')
+    else
+      self.where(:channel_id => options[:channel_id], :read => false).order('created_at ASC')
+    end
+  end
+
   private
   # Generates an MD5 hash from article link
   # to identify multiples articles from it.
