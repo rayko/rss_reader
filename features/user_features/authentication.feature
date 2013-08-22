@@ -31,3 +31,15 @@ Feature: User Authentication
                   Then page should have notice message "Signed out successfully"
                   And I should see a "Login" link
                   And I should see a "Sign Up" link
+
+
+        Scenario: Login with Twitter
+                  Given I am on the index page
+                  When I click "Sign in with Twitter" link
+                  Then page should have notice message "Successfully authenticated from Twitter"
+
+        @wip
+        Scenario: Login with Twitter
+                  Given I am on the index page
+                  When I click "Sign in with Google" link
+                  Then page should have notice message "Successfully authenticated from Google"
