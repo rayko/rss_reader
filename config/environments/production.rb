@@ -68,4 +68,7 @@ RssReader::Application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = { :address => 'localhost', :port => 25, :openssl_verify_mode => 'none' , :domain => 'reader.raykosite.com' }
   config.action_mailer.default_url_options = { :host => "reader.raykosite.com" }
+
+  # Use the real thing
+  OmniAuth.config.test_mode = false
 end
