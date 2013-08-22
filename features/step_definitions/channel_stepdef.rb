@@ -21,6 +21,7 @@ When(/^I click Add button from channel manager$/) do
 end
 
 Given(/^I have "(.*?)" channel$/) do |count|
+  Channel.delete_all
   count.to_i.times do
     FactoryGirl.create :channel, :user_id => retrive_test_account.id
   end

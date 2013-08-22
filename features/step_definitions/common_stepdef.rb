@@ -7,7 +7,7 @@ Then(/^page should have notice message "(.*?)"$/) do |message|
 end
 
 Given(/^I click "(.*?)" link$/) do |name|
-  click_link name
+  find_link(name).click
 end
 
 When(/^I click "(.*?)" button$/) do |name|
