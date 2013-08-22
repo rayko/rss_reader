@@ -28,15 +28,10 @@ class User < ActiveRecord::Base
 
   before_create :assign_profile_type
 
-  # Devise custon lookup by login or email for authentication
-  def self.find_first_by_auth_conditions(warden_conditions)
-    conditions = warden_conditions.dup
-    if login = conditions.delete(:login)
-      where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
-    else
-      where(conditions).first
-    end
-  end
+  require 'omniauth_for_user'
+  require 'authentication_by_login'
+  extend AuthenticationByLogin
+  include OmniauthForUser
 
   # Fetch all user articles
   def all_articles
@@ -54,53 +49,6 @@ class User < ActiveRecord::Base
 
   def starred_articles_count
     starred_articles.size
-  end
-
-  # Twitter authentication with omniauth
-  def self.find_for_twitter_oauth(auth, signed_in_resource=nil)
-    user = User.where(:provider => auth.provider, :uid => auth.uid).first
-    unless user
-      user = User.create(first_name:auth.info.name.split(' ').first,
-                         last_name:auth.info.name.split(' ').last,
-                         username:auth.info.nickname,
-                         provider:auth.provider,
-                         uid:auth.uid,
-                         password:Devise.friendly_token[0,20]
-                         )
-      user.confirm!
-    end
-    user
-  end
-
-  def self.find_for_google_oauth2(auth, signed_in_resource=nil)
-    user = User.where(:provider => auth.provider, :uid => auth.uid).first
-    unless user
-      user = User.create(first_name:auth.info.first_name,
-                         last_name:auth.info.last_name,
-                         username:(auth.info.first_name + auth.info.last_name),
-                         provider:auth.provider,
-                         email:auth.info.email,
-                         uid:auth.uid,
-                         password:Devise.friendly_token[0,20]
-                         )
-      user.confirm!
-    end
-    user
-  end
-
-
-  def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session["devise.twitter_data"] && session["devise.twitter_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
-      elsif data = session["devise.google_data"] && session["devise.google_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
-      end
-    end
-  end
-
-  def email_required?
-    super && provider.blank?
   end
 
   def channel_limit

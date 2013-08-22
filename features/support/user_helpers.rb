@@ -1,6 +1,12 @@
 module UserHelpers
   def create_test_account
-    return FactoryGirl.create :test_user
+    user = retrive_test_account
+    if user
+      return user
+    else
+      return FactoryGirl.create :test_user
+    end
+
   end
 
   def confirm_test_account
