@@ -62,6 +62,18 @@ end
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
 
+OmniAuth.config.test_mode = true
+OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({:provider => 'twitter',
+                                                               :uid => '123545',
+                                                               :info => {:nickname => "rayko",
+                                                                 :name => "Rayko Diarghi"}})
+OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({:provider => 'google_oauth2',
+                                                                     :uid => '123545',
+                                                                     :info => {:first_name => "Rayko",
+                                                                       :last_name => "Diarghi",
+                                                                       :email => 'rayko@example.com',
+                                                                       :name => 'Rayko Diarghi'}})
+
 # Helpers
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "user_helpers"))
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "nav_helpers"))

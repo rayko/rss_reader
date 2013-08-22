@@ -45,5 +45,4 @@ end
 Then(/^I should see "(.*?)" as "(.*?)" on my profile$/) do |value, field|
   visit edit_user_registration_path
   find_field('user_' + field.downcase.split(' ').join('_')).value.should eq value
-
 end
