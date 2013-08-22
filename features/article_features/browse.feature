@@ -5,10 +5,8 @@ Feature: Article Browsing
 
          Background:
                 Given I am a user of the site
-                And I have "1" channel
+                And I have "1" channel with name "MS Paint Adventures"
                 And I am on the index page
-
-
 
          @javascript
          Scenario: Retrive Articles List
