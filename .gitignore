@@ -31,3 +31,6 @@ db/sphinx/*
 
 # Ignore compiled Assests
 public/assets/*
+
+# Ignore simplecov reports
+coverage

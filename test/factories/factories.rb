@@ -60,4 +60,7 @@ FactoryGirl.define do
     description 'Some article lol'
   end
 
+  factory :comment do
+    text 'Some text'
+  end
 end
