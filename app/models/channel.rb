@@ -1,5 +1,5 @@
 class Channel < ActiveRecord::Base
-  attr_accessible :name, :url
+  attr_accessible :name, :url, :user_id
 
   belongs_to :user
 
@@ -12,6 +12,7 @@ class Channel < ActiveRecord::Base
 
   require "channel_uniq_url_validator"
   require "channel_valid_feed_validator"
+  validates :user_id, :presence => true
   validates :url, :presence => true, :uniq_url => true, :valid_feed => true, :on => :create
   validates_with ChannelLimitValidator
 
