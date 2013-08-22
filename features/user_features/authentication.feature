@@ -38,7 +38,6 @@ Feature: User Authentication
                   When I click "Sign in with Twitter" link
                   Then page should have notice message "Successfully authenticated from Twitter"
 
-        @wip
         Scenario: Login with Twitter
                   Given I am on the index page
                   When I click "Sign in with Google" link
