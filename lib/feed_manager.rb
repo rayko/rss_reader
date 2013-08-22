@@ -1,10 +1,21 @@
 # -*- coding: utf-8 -*-
 class FeedManager
   require 'feedzirra'
+  require 'feed_manager_test'
+  require 'feed'
+  include FeedManagerTest
   private_class_method :new
 
   @@feed_list = {}
   @@instance = nil
+
+  def self.clear_cache
+    @@feed_list = {}
+  end
+
+  def self.feed_list
+    @@feed_list
+  end
 
   # Allows only one instance in the app
   def self.instance
@@ -15,26 +26,26 @@ class FeedManager
   end
 
   # Tries to get a feed from either Feedzirra or local cache
-  # If there is no cached feed, it creates one and returns it
-  def get_feed(url)
+  # If there is no cached feed, it creates one and returns it.
+  # test flag considers url as either filename to parse a test
+  # feed or a valid url to request real data
+  def get_feed(url, test=false)
     logger.info 'FeedManager: Starting feed request process'
-    if Rails.env  == 'test'
-      fetch_test_feed
+    cached_feed = get_feed_from_cache(url)
+    if cached_feed
+      logger.info 'FeedManager: Feed found in cache, returning it'
+      return cached_feed
     else
-      cached_feed = get_feed_from_cache(url)
-      if cached_feed
-        logger.info 'FeedManager: Feed found in cache, returning it'
-        return cached_feed
-      else
-        return request_feed
-      end
+      return request_feed(url, test)
     end
   end
 
 
   # Gets a feed from either Feedzirra or cache and returns the entries.
-  def update_feed(url)
-    feed = get_feed(url)
+  # test flags considers url either a filename to parse a stored test
+  # feed or a valid url to request real data
+  def update_feed(url, test=false)
+    feed = get_feed(url, test)
     if feed.valid?
       unless feed.expired?
         return feed.items
@@ -49,22 +60,20 @@ class FeedManager
     end
   end
 
-  def create_test_feed_object
-    items = []
-    4.times do
-      items << FeedItem.new('Some Article From Feed', 'Some content', 'http://link-to-article-in-feed.com', Time.now)
-    end
-    return Feed.new :title => 'Some Feed',
-    :items => items,
-    :url => 'http://somesite.com',
-    :feed_url => 'http://somefeed.com',
-    :valid => true
-  end
-
   private
-  def request_feed
+  def request_feed url, test=false
     logger.info "FeedManager: No feed found in cache, requesting to #{url}"
-    data = Feedzirra::Feed.fetch_and_parse url unless url.blank?
+    begin
+      if test
+        data = Feedzirra::Feed.parse(get_file(url))
+        data.feed_url = url
+      else
+        data = Feedzirra::Feed.fetch_and_parse url unless url.blank?
+      end
+    rescue Feedzirra::NoParserAvailable
+      logger.info "FeedManager: Feedzirra failed to parse fetched data from #{url}"
+      data = nil
+    end
     # Feed validation
     # Feedzirra does the fetching and parsing with its own parsers,
     # if Feedzirra returns nil after a fetch, the feed is not valid.
@@ -85,16 +94,6 @@ class FeedManager
 
   end
 
-  # Only for tests purposes
-  def fetch_test_feed
-    logger.info 'FeedManager: env is test, fetching test data'
-    data = Feedzirra::Feed.parse File.open(Rails.root.join('test', 'mspaintadventures_test_feed.xml'), 'r').read
-    return Feed.new :title => data.title,
-                    :items => data.entries,
-                    :url => data.url,
-                    :feed_url => data.feed_url,
-                    :valid => true
-  end
 
   # Saves a feed in cache, returns a Feed object
   def store_feed(feed)
@@ -120,48 +119,5 @@ class FeedManager
 
   def logger
     Rails.logger
-  end
-end
-
-class Feed
-  attr_accessor :title, :items, :url, :feed_url, :valid,
-                :created_at
-
-  def initialize(options)
-    options[:title].blank? ? self.title = 'Untitled' : self.title = options[:title]
-    self.url = options[:url]
-    self.feed_url = options[:feed_url]
-    self.valid = options[:valid] || false
-    self.items = []
-    self.created_at = Time.now
-
-    if options[:items]
-      options[:items].each do |item|
-        self.items << FeedItem.new(item.title, item.url, item.summary, item.published)
-      end
-    end
-  end
-
-  def valid?
-    self.valid
-  end
-
-  def expired?
-    (Time.now - self.created_at) > 300 # 5 minutes
-  end
-end
-
-class FeedItem
-  attr_accessor :title, :url, :summary, :pub_date
-
-  def initialize(title, url, summary, pub_date)
-    self.title = title
-    self.url = url
-    self.summary = summary
-    self.pub_date = pub_date || DateTime.now
-  end
-
-  def published
-    self.pub_date
   end
 end
