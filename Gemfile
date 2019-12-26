@@ -1,28 +1,33 @@
 source 'https://rubygems.org'
 
-gem 'rack', '1.4.1'
-gem 'rails', '3.2.8'
+gem 'rack', '1.4.5'
+gem 'rails', '3.2.17'
+
+# Dependency fixes during udpate
+gem 'rake', '10.1.0'
+gem 'rack-cache', '1.7.1'
+gem 'thor', '0.20.3'
 
 
-gem 'haml-rails'
-gem 'devise'
-gem 'therubyracer'
-gem 'formtastic'
-gem 'feedzirra'
-gem 'jquery-ui-sass-rails'
-gem 'jquery-ui-rails'
+gem 'haml-rails', '0.4'
+gem 'devise', '3.0.2'
+gem 'therubyracer', '0.11.4'
+gem 'formtastic', '2.2.1'
+gem 'feedzirra', '0.0.24'
+gem 'jquery-ui-sass-rails', '4.0.3.0'
+gem 'jquery-ui-rails', '4.0.3'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-twitter'
-gem 'paperclip'
-gem 'meta_search'
-gem 'mysql2',          '0.3.21'
+gem 'paperclip', '3.5.1'
+gem 'meta_search', '1.1.3'
+gem 'mysql2', '0.3.21'
 gem 'thinking-sphinx', '~> 3.0.2'
-gem 'activeadmin'
-gem 'whenever', :require => false
-gem 'less-rails'
-gem 'twitter-bootstrap-rails'
-gem 'formtastic-bootstrap'
+gem 'activeadmin', '0.6.0'
+gem 'whenever', '0.8.4', :require => false
+gem 'less-rails', '2.3.2'
+gem 'twitter-bootstrap-rails', '2.2.8'
+gem 'formtastic-bootstrap', '2.1.3'
 
 # Gems used only for assets and not required
 # in production environments by default.
