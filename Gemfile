@@ -16,7 +16,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-twitter'
 gem 'paperclip'
 gem 'meta_search'
-gem 'mysql2',          '0.3.12b4'
+gem 'mysql2',          '0.3.21'
 gem 'thinking-sphinx', '~> 3.0.2'
 gem 'activeadmin'
 gem 'whenever', :require => false
@@ -44,7 +44,7 @@ group :test do
 end
 
 group :development do
-  gem 'debugger'
+  # gem 'debugger'
   gem 'sqlite3'
   gem 'pg'
 end

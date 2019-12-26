@@ -34,3 +34,5 @@ public/assets/*
 
 # Ignore simplecov reports
 coverage
+
+config/*.yml
