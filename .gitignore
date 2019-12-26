@@ -36,3 +36,5 @@ public/assets/*
 coverage
 
 config/*.yml
+config/*.conf
+config/*.config
