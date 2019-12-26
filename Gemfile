@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rack', '1.4.5'
-gem 'rails', '3.2.17'
+gem 'rails', '3.2.22'
 
 # Dependency fixes during udpate
 gem 'rake', '10.1.0'
@@ -13,7 +13,7 @@ gem 'haml-rails', '0.4'
 gem 'devise', '3.0.2'
 gem 'therubyracer', '0.11.4'
 gem 'formtastic', '2.2.1'
-gem 'feedzirra', '0.0.24'
+gem 'feedzirra', '0.2.0.rc1'
 gem 'jquery-ui-sass-rails', '4.0.3.0'
 gem 'jquery-ui-rails', '4.0.3'
 gem 'omniauth'
@@ -29,13 +29,10 @@ gem 'less-rails', '2.3.2'
 gem 'twitter-bootstrap-rails', '2.2.8'
 gem 'formtastic-bootstrap', '2.1.3'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
-end
+gem 'sass-rails',   '~> 3.2.3'
+gem 'coffee-rails', '~> 3.2.1'
+gem 'uglifier', '>= 1.0.3'
+
 
 gem 'jquery-rails'
 
@@ -50,7 +47,7 @@ end
 
 group :development do
   # gem 'debugger'
-  gem 'sqlite3'
+  gem 'sqlite3', '1.3.13'
   gem 'pg'
 end
 

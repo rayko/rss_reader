@@ -1,3 +1,6 @@
+# coding: utf-8
+require 'active_admin'
+
 ActiveAdmin.setup do |config|
 
   # == Site Title
