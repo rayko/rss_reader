@@ -1,3 +1,5 @@
 RSS Reader
 
 Just a simple reader.
+
+Note: This one is quite broken at this point, will attempt to bring it to life in the future.
