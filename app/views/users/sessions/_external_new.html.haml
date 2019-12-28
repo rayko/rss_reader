@@ -1,6 +1,6 @@
 = semantic_form_for resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-horizontal'} do |form|
   = form.inputs :title => 'Sign in' do
-    = form.input :login
+    = form.input :email, :label => 'Login'
     = form.input :password
     - if devise_mapping.rememberable?
       = form.input :remember_me, :as => :boolean
@@ -8,7 +8,7 @@
     = form.action :submit, :label => 'Sign In', :button_html => {:class => 'btn btn-primary', :disable_with => 'Signing in...'}
 
 %p.text-center
-  = link_to 'Sign in with Twitter', user_omniauth_authorize_path(:twitter), :class => 'btn btn-info btn-large'
-  = link_to 'Sign in with Google', user_omniauth_authorize_path(:google_oauth2), :class => 'btn btn-primary btn-large'
+  = link_to 'Sign in with Twitter', user_twitter_omniauth_authorize_path(:twitter), :class => 'btn btn-info btn-large'
+  = link_to 'Sign in with Google', user_google_oauth2_omniauth_authorize_path(:google_oauth2), :class => 'btn btn-primary btn-large'
 
 = render "users/shared/links"

@@ -10,6 +10,3 @@
       = link_to "Request Confirmation Info", new_confirmation_path(resource_name), :class => 'btn btn-small'
     - if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks'
       = link_to "Request Unlock", new_unlock_path(resource_name), :class => 'btn btn-small'
-    //- if devise_mapping.omniauthable?
-    //  - resource_class.omniauth_providers.each do |provider|
-    //    = link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider)

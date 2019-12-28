@@ -3,9 +3,6 @@ source 'https://rubygems.org'
 # gem 'rack', '1.4.5'
 gem 'rails', '4.2.11.1'
 
-# Dependency fixes during udpate
-
-gem 'haml-rails'
 gem 'devise'
 gem 'therubyracer'
 gem 'formtastic'
@@ -21,6 +18,10 @@ gem 'mysql2', '0.3.21'
 gem 'thinking-sphinx'
 gem 'activeadmin', '1.0.0'
 gem 'whenever', '0.8.4', :require => false
+gem 'activerecord-session_store'
+
+# Assets
+gem "font-awesome-rails"
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'formtastic-bootstrap'
@@ -28,7 +29,7 @@ gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
 gem 'jquery-rails'
-gem 'activerecord-session_store'
+gem 'haml-rails'
 
 group :test do
   gem 'factory_girl_rails', :require => false
