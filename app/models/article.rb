@@ -1,6 +1,4 @@
 class Article < ActiveRecord::Base
-  attr_accessible :description, :link, :pub_date, :starred, :title, :channel_id
-
   belongs_to :channel
   has_many :comments, :foreign_key => :article_hash_tag, :primary_key => :hash_tag
 

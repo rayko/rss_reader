@@ -1,6 +1,4 @@
 class Channel < ActiveRecord::Base
-  attr_accessible :name, :url, :user_id
-
   belongs_to :user
 
   # before_create :validate_feed

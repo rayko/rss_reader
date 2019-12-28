@@ -1,6 +1,4 @@
 class ProfileType < ActiveRecord::Base
-  attr_accessible :channel_limit, :name
-
   has_many :users
 
   def display_name

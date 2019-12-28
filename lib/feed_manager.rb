@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 class FeedManager
-  require 'feedzirra'
+  require 'feedjira'
   require 'feed_manager_test'
   require 'feed'
   include FeedManagerTest
