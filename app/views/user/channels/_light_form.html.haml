@@ -1,7 +1,28 @@
 #add_channel
-  = link_to 'Add Channel', '#none', :class => 'channel_form_toggle'
-  %div.add_channel_form
-    = form_for :channel, :url => user_channels_url, :remote => true, :html => {:id => 'fast_channel_add_form', 'data-type' => 'json'} do |f|
-      = f.text_field :url, :class => 'input-block-level'
-      = f.submit 'Add', :class => 'btn', :disable_with => 'Fetching...'
-      %div.channel_error
+  = form_for :channel, :url => user_channels_url, :remote => true, :html => {:id => 'fast_channel_add_form', 'data-type' => 'json'} do |f|
+    .input-group.mb-2.mr-sm-2
+      = f.text_field :url, :class => 'input-block-level form-control', :placeholder => "Url...", :type => "text"
+      = f.submit 'Add', :class => 'btn btn-primary mb-2', :disable_with => 'Fetching...', :type => 'submit'
+
+  -# %form.form-inline
+  -#   %input#inlineFormInputName2.form-control.mb-2.mr-sm-2{:placeholder => "Jane Doe", :type => "text"}/
+  -#   %label.sr-only{:for => "inlineFormInputGroupUsername2"} Username
+  -#   .input-group.mb-2.mr-sm-2
+  -#     .input-group-prepend
+  -#       .input-group-text @
+  -#     %input#inlineFormInputGroupUsername2.form-control{:placeholder => "Username", :type => "text"}/
+  -#   .form-check.mb-2.mr-sm-2
+  -#     %input#inlineFormCheck.form-check-input{:type => "checkbox"}/
+  -#     %label.form-check-label{:for => "inlineFormCheck"}
+  -#       Remember me
+  -#   %button.btn.btn-primary.mb-2{:type => "submit"} Submit
+
+
+
+
+  -# = link_to 'Add Channel', '#none', :class => 'channel_form_toggle'
+  -# %div.add_channel_form
+  -#   = form_for :channel, :url => user_channels_url, :remote => true, :html => {:id => 'fast_channel_add_form', 'data-type' => 'json'} do |f|
+  -#     = f.text_field :url, :class => 'input-block-level'
+  -#     = f.submit 'Add', :class => 'btn', :disable_with => 'Fetching...'
+  -#     %div.channel_error

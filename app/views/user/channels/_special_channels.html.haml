@@ -1,10 +1,5 @@
 #special_channels
-  %ul.nav.nav-list
-    %li
-      %a{:href => '#none', '_data-path' => user_articles_full_list_url, :class => 'full_articles_list'}
-        All Items
-
-    %li
-      %a{:href => '#none', '_data-path' => user_articles_starred_url, :class => 'starred_articles'}
-        Starred Items
-    %li= link_to 'Manage Channels', user_channels_url
+  %nav.nav.flex-column.border.rounded.mb-2
+    = link_to "All Items", '#', "_data-path" => user_articles_full_list_url, :class => 'nav-link full_articles_list'
+    = link_to "Starred Items", '#', "_data-path" => user_articles_starred_url, :class => 'nav-link starred_articles'
+    = link_to "Manage Channels", user_channels_url, :class => 'nav-link starred_articles'

@@ -1,14 +1,9 @@
 #channel_list{'_data-path' => user_channels_list_url}
-  %ul.nav.nav-list
-    %li.nav-header
-    - if @channels
-      - if @channels.any?
-        - @channels.each do |channel|
-          %li
-            %a{:href => '#none', :class => 'channel_link', '_data-path' => user_channel_articles_url(channel.id)}
-              %span.channel_name= channel.name
-              %span.badge.badge-success.pull-right= channel.unread_articles_count
-      - else
-        %li No channels, try adding one
+  %nav.nav.flex-column.border.rounded
+    - if @channels && @channels.any?
+      - @channels.each do |channel|
+        %a.nav-link.channel_link{:href => '#', '_data-path' => user_channel_articles_url(channel.id)}
+          %span.channel_name= channel.name
+          %span.badge.badge-success.float-right= channel.unread_articles_count
     - else
-      %li Loading...
+      %p No channels

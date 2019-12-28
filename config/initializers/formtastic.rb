@@ -77,4 +77,3 @@ Formtastic::FormBuilder.default_text_area_height = 3
 
 # config/initializers/formtastic.rb
 # Setup Twitter Boostrap compatibility
-Formtastic::Helpers::FormHelper.builder = FormtasticBootstrap::FormBuilder

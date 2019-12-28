@@ -1,22 +1,18 @@
-.navbar.navbar-fluid-top
-  .navbar-inner
-    .container-fluid
-      %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-      %a.brand(href="#") RSS Reader
-      .container.nav-collapse
-        %ul.nav.pull-left
-          %li
-            #search_form
-              = render :partial => 'user/search/form'
-        %ul.nav.pull-right
-          - if user_signed_in?
-            %li= link_to 'Home', root_url
-            %li= link_to 'Edit Profile', edit_user_registration_url
-            %li= link_to 'Logout', destroy_user_session_url, :method => :delete
-          - else
-            %li= link_to 'Home', root_url
-            %li= link_to 'Login', new_user_session_url
-            %li= link_to 'Sign Up', new_user_registration_url
+.container-fluid.px-0.mb-4
+  %nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+    %a.navbar-brand{:href => "#"} RSS Reader
+    %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
+      %span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+      %ul.navbar-nav.mr-auto
+        - if user_signed_in?
+          %li.nav-item
+            = link_to "Edit Profile", edit_user_registration_url, :class => 'nav-link'
+          %li.nav-item
+            = link_to "Logout", destroy_user_session_url, :class => 'nav-link'
+        - else
+          %li.nav-item
+            = link_to "Login", new_user_session_url, :class => 'nav-link'
+          %li.nav-item
+            = link_to "Sign Up", new_user_registration_url, :class => 'nav-link'
+      = render partial: "user/search/form"

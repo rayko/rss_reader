@@ -21,10 +21,7 @@ gem 'whenever', '0.8.4', :require => false
 gem 'activerecord-session_store'
 
 # Assets
-gem "font-awesome-rails"
 gem 'less-rails'
-gem 'twitter-bootstrap-rails'
-gem 'formtastic-bootstrap'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
